@@ -1,15 +1,18 @@
 package org.engine;
 
-public class App {
+import org.engine.tools.LevelSelector;
 
+public class App {
     String getGreeting() {
         return "mdr";
     }
 
     public static void main(String[] args) {
-        System.out.println("Ok, on test.");
+        System.out.println("Launching App");
 
-        final Test cc = new Test();
-        cc.draw();
+        final ScreenManager screenManager = new ScreenManager();
+        screenManager.startScreen();
+        screenManager.setLevel(LevelSelector.EXAMPLE_LEVEL);
+
     }
 }

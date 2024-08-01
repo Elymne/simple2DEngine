@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.UUID;
 import javax.annotation.Nullable;
 import org.engine.nodes.PositionNode;
+import org.engine.tools.Constants;
 
 public class Block extends GameObject {
     public final PositionNode positionNode;
@@ -15,7 +16,9 @@ public class Block extends GameObject {
 
     @Override
     public void paint(Graphics g) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'paint'");
+        g.setColor(Constants.CUSTOM_RED.darker());
+        g.drawRect(positionNode.getPosX(), positionNode.getPosY(), 40, 40);
+        g.setColor(Constants.CUSTOM_RED);
+        g.fillRect(positionNode.getPosX(), positionNode.getPosY(), 40, 40);
     }
 }
