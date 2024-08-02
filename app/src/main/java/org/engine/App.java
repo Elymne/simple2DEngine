@@ -1,6 +1,6 @@
 package org.engine;
 
-import org.engine.tools.LevelSelector;
+import org.engine.tools.level.LevelEnum;
 
 public class App {
     String getGreeting() {
@@ -12,7 +12,7 @@ public class App {
 
         final ScreenManager screenManager = new ScreenManager();
         screenManager.startScreen();
-        screenManager.setLevel(LevelSelector.EXAMPLE_LEVEL);
+        screenManager.setLevel(LevelEnum.EXAMPLE_LEVEL);
 
     }
 }

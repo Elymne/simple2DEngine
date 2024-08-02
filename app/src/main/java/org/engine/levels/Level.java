@@ -1,13 +1,13 @@
 package org.engine.levels;
 
-import java.util.List;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import org.engine.gameobjects.GameObject;
 
 public abstract class Level extends JPanel {
-    public final List<GameObject> gameObjects;
+    public final ArrayList<GameObject> gameObjects;
 
-    public Level(List<GameObject> gameObjects) {
+    public Level(ArrayList<GameObject> gameObjects) {
         this.gameObjects = gameObjects;
     }
 

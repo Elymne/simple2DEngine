@@ -5,59 +5,54 @@ import javax.swing.JFrame;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import org.engine.levels.Level;
-import org.engine.tools.Constants;
-import org.engine.tools.LevelSelector;
+import org.engine.tools.constants.Colors;
+import org.engine.tools.level.LevelEnum;
+import org.engine.tools.level.LevelSelector;
+import org.engine.tools.physics.FramePerSecond;
+import org.engine.tools.physics.Physics;
+import org.engine.tools.physics.PhysicsListener;
 
-public class ScreenManager {
+public class ScreenManager implements PhysicsListener {
     private final JFrame jFrame = new JFrame("Application");
-
     private @Nullable Level currentLevel = null;
-    private @Nullable Timer currentTimer = null;
 
     public void startScreen() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int width = (int) screenSize.getWidth();
         int height = (int) screenSize.getHeight();
 
-        jFrame.getContentPane().setBackground(Constants.CUSTOM_WHITE);
+        jFrame.getContentPane().setBackground(Colors.CUSTOM_WHITE);
         jFrame.setSize(width, height);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
+
+        Physics.getInstance().addNewListener(this);
     }
 
-    public void setLevel(int index) {
+    public void setLevel(LevelEnum level) {
         try {
-            currentLevel = LevelSelector.generateLevelFromIndex(index);
+            currentLevel = LevelSelector.generateLevelFromIndex(level);
             jFrame.getContentPane().add(currentLevel);
-
-            currentTimer = new Timer();
-            this.currentTimer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() {
-                    if (currentLevel != null) {
-                        currentLevel.repaint();
-                        return;
-                    }
-                }
-            }, 0, Constants.THIRTY_FPS);
+            Physics.getInstance().run(FramePerSecond.THIRTY_FPS);
         } catch (Exception e) {
             currentLevel = null;
-            currentTimer = null;
+            Physics.getInstance().pause();
             e.printStackTrace();
         }
     }
 
     public void clearLevel() {
         jFrame.getContentPane().remove(currentLevel);
-        if (currentTimer != null) {
-            currentTimer.cancel();
-        }
-        currentTimer = null;
         currentLevel = null;
+        Physics.getInstance().pause();
+    }
+
+    @Override
+    public void onNextFrame(int time) {
+        if (currentLevel != null) {
+            currentLevel.repaint();
+        }
     }
 
 }

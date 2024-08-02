@@ -3,15 +3,16 @@ package org.engine.levels;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.Arrays;
 import org.engine.gameobjects.Block;
 import org.engine.gameobjects.GameObject;
 
 public class ExampleLevel extends Level {
     public ExampleLevel() {
-        super(Arrays.asList(new GameObject[] {
+        super(new ArrayList<GameObject>(Arrays.asList(new GameObject[] {
                 new Block(10, 10, null)
-        }));
+        })));
     }
 
     @Override
