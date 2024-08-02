@@ -30,10 +30,4 @@ public class ExampleLevel extends Level {
         int height = (int) screenSize.getHeight();
         return new Dimension(width, height);
     }
-
-    @Override
-    public void createPaint() {
-        throw new UnsupportedOperationException("Unimplemented method 'createPaint'");
-    }
-
 }

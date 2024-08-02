@@ -7,8 +7,8 @@ public class SimplePhysicsNode extends Node implements PhysicsListener {
     private PositionNode positionNode;
     private CollisionNode collisionNode;
 
-    private double velocityThreshold = 1.0;
     private double velocity = 0;
+    private double velocityThreshold = 0.2;
 
     public SimplePhysicsNode(PositionNode positionNode, CollisionNode collisionNode) {
         Physics.getInstance().addNewListener(this);
@@ -20,14 +20,13 @@ public class SimplePhysicsNode extends Node implements PhysicsListener {
     public void onNextFrame(int time) {
         falling();
         System.out.println("Added velocity : " + velocity * time);
-
-        // positionNode.posY = positionNode.posY + velocity * (time / 100);
-        // System.out.println(positionNode.posY);
+        positionNode.posY = positionNode.posY + velocity * time;
+        System.out.println(positionNode.posY);
     }
 
     private void falling() {
         if (velocity < velocityThreshold) {
-            velocity += 0.2;
+            velocity += 0.04;
         } else if (velocity > velocityThreshold) {
             velocity = velocityThreshold;
         }

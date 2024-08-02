@@ -1,8 +1,6 @@
 package org.engine;
 
-import javax.annotation.Nullable;
 import javax.swing.JFrame;
-
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import org.engine.levels.Level;
@@ -15,7 +13,7 @@ import org.engine.tools.physics.PhysicsListener;
 
 public class ScreenManager implements PhysicsListener {
     private final JFrame jFrame = new JFrame("Application");
-    private @Nullable Level currentLevel = null;
+    private Level currentLevel = null;
 
     public void startScreen() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -34,7 +32,7 @@ public class ScreenManager implements PhysicsListener {
         try {
             currentLevel = LevelSelector.generateLevelFromIndex(level);
             jFrame.getContentPane().add(currentLevel);
-            Physics.getInstance().run(FramePerSecond.THIRTY_FPS);
+            Physics.getInstance().run(FramePerSecond.SIXTY_FPS);
         } catch (Exception e) {
             currentLevel = null;
             Physics.getInstance().pause();
@@ -52,6 +50,7 @@ public class ScreenManager implements PhysicsListener {
     public void onNextFrame(int time) {
         if (currentLevel != null) {
             currentLevel.repaint();
+            currentLevel.revalidate();
         }
     }
 

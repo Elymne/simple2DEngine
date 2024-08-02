@@ -11,5 +11,4 @@ public abstract class Level extends JPanel {
         this.gameObjects = gameObjects;
     }
 
-    abstract public void createPaint();
 }
