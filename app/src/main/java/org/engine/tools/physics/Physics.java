@@ -27,9 +27,7 @@ public class Physics {
         currentTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                for (PhysicsListener physicsListener : physicsListeners) {
-                    physicsListener.onNextFrame(fpsTarget);
-                }
+                notifyListeners(fpsTarget);
             }
         }, 0, fpsTarget);
     }
@@ -47,8 +45,14 @@ public class Physics {
         physicsListeners.add(physicsListener);
     }
 
-    public void removeNewListener(PhysicsListener physicsListener) {
+    public void removeListener(PhysicsListener physicsListener) {
         physicsListeners.remove(physicsListener);
+    }
+
+    private void notifyListeners(int fpsTarget) {
+        for (PhysicsListener physicsListener : physicsListeners) {
+            physicsListener.onNextFrame(fpsTarget);
+        }
     }
 
 }

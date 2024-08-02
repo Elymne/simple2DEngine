@@ -5,7 +5,6 @@ import org.engine.tools.physics.PhysicsListener;
 
 public class SimplePhysicsNode extends Node implements PhysicsListener {
     private PositionNode positionNode;
-    private CollisionNode collisionNode;
 
     private double velocity = 0;
     private double velocityThreshold = 0.2;
@@ -13,7 +12,6 @@ public class SimplePhysicsNode extends Node implements PhysicsListener {
     public SimplePhysicsNode(PositionNode positionNode, CollisionNode collisionNode) {
         Physics.getInstance().addNewListener(this);
         this.positionNode = positionNode;
-        this.collisionNode = collisionNode;
     }
 
     @Override

@@ -14,10 +14,15 @@ public class Block extends GameObject {
     public final CollisionNode collisionNode;
     public final SimplePhysicsNode physicsNode;
 
-    public Block(int posX, int posY, @Nullable UUID key) {
+    private final double width;
+    private final double heigth;
+
+    public Block(double posX, double posY, double width, double height, @Nullable UUID key) {
         super(key);
+        this.width = width;
+        this.heigth = height;
         positionNode = new PositionNode(posX, posY);
-        collisionNode = new CollisionNode();
+        collisionNode = new CollisionNode(this, width, height);
         physicsNode = new SimplePhysicsNode(positionNode, collisionNode);
     }
 
