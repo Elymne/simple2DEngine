@@ -30,10 +30,6 @@ public class PhysicsNode extends Node implements CollisionListener {
         this.isStatic = isStatic;
 
         Collision.getInstance().addNewGameObject(gameObject);
-
-        if (isStatic == false) {
-            Collision.getInstance().addNewListener(this);
-        }
     }
 
     public double getVelocity() {
@@ -51,15 +47,20 @@ public class PhysicsNode extends Node implements CollisionListener {
     }
 
     @Override
-    public void onCollision(ArrayList<GameObject> gameObjects, int timeDelta) {
+    public void listenCollision(ArrayList<GameObject> buffer, int timeDelta) {
         if (isJumping) {
             // TODO : Manage jumping physics.
             return;
         }
 
-        if (gameObjects.size() == 0) {
+        if (buffer.size() == 0) {
             falling(timeDelta);
             return;
+        }
+
+        final PositionNode firstCollisionPosition = (PositionNode) buffer.getFirst().findNode(PositionNode.class);
+        if (firstCollisionPosition != null && positionNode.posY + heigth >= firstCollisionPosition.posY) {
+            positionNode.posY = firstCollisionPosition.posY - heigth;
         }
 
         velocity = 0;

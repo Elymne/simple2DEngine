@@ -5,5 +5,5 @@ import java.util.ArrayList;
 import org.engine.gameobjects.GameObject;
 
 public interface CollisionListener {
-    abstract public void onCollision(ArrayList<GameObject> gameObjects, int timeDelta);
+    abstract public void listenCollision(ArrayList<GameObject> buffer, int timeDelta);
 }

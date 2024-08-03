@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import org.engine.exceptions.NoPositionNodeException;
 import org.engine.gameobjects.Block;
 import org.engine.gameobjects.GameObject;
@@ -15,7 +14,7 @@ public class ExampleLevel extends Level {
     public ExampleLevel() throws NoPositionNodeException {
         super(new ArrayList<GameObject>(Arrays.asList(new GameObject[] {
                 Block.build(10, 10, 40, 40, null),
-                StaticBlock.build(0, 100, 200, 20, null),
+                StaticBlock.build(0, 600, 200, 20, null),
         })));
     }
 

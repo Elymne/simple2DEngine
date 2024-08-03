@@ -9,7 +9,6 @@ import org.engine.tools.physics.time.TimeListener;
 
 public class Collision implements TimeListener {
     private static Collision instance;
-    private final ArrayList<CollisionListener> collisionListeners = new ArrayList<CollisionListener>();
     private final ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 
     private Collision() {
@@ -25,23 +24,18 @@ public class Collision implements TimeListener {
 
     @Override
     public void onNextFrame(int timeDelta) {
-        for (int i = 0; i < gameObjects.size(); i++) {
-            final ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-            for (int j = 0; i < gameObjects.size(); i++) {
-                if (checkCollision(gameObjects.get(i), gameObjects.get(j))) {
-                    gameObjects.add(gameObjects.get(j));
+        for (GameObject g1 : gameObjects) {
+            final PhysicsNode physicsNode = (PhysicsNode) g1.findNode(PhysicsNode.class);
+            if (physicsNode != null && physicsNode.isStatic == false) {
+                final ArrayList<GameObject> bufferCollision = new ArrayList<GameObject>();
+                for (GameObject g2 : gameObjects) {
+                    if (checkCollision(g1, g2)) {
+                        bufferCollision.add(g2);
+                    }
                 }
+                physicsNode.listenCollision(bufferCollision, timeDelta);
             }
-            collisionListeners.get(i).onCollision(gameObjects, timeDelta);
         }
-    }
-
-    public void addNewListener(CollisionListener collisionListener) {
-        collisionListeners.add(collisionListener);
-    }
-
-    public void removeNewListener(CollisionListener collisionListener) {
-        collisionListeners.remove(collisionListener);
     }
 
     public void addNewGameObject(GameObject gameObject) {
@@ -67,13 +61,14 @@ public class Collision implements TimeListener {
             return false;
         }
 
-        if (positionNode1.posX < positionNode2.posX + physicsNode2.width &&
-                positionNode1.posX + physicsNode1.width > positionNode2.posX &&
-                positionNode1.posY < positionNode2.posY + physicsNode2.heigth &&
-                positionNode1.posY + physicsNode1.heigth > positionNode2.posY) {
-            return false;
+        if (positionNode1.posX + physicsNode1.width >= positionNode2.posX &&
+                positionNode1.posX <= positionNode2.posX + physicsNode2.width &&
+                positionNode1.posY + physicsNode1.heigth >= positionNode2.posY &&
+                positionNode1.posY <= positionNode2.posY + physicsNode2.heigth) {
+            return true;
         }
 
         return false;
+
     }
 }
