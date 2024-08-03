@@ -6,8 +6,8 @@ import org.engine.tools.collisions.CollisionType;
 import org.engine.tools.collisions.Collisions;
 
 public class CollisionNode extends Node implements CollisionListener {
-    private double width;
-    private double heigth;
+    public final double width;
+    public final double heigth;
 
     public CollisionNode(GameObject gameObject, double width, double heigth) {
         Collisions.getInstance().addNewGameObject(this, gameObject);
@@ -17,7 +17,6 @@ public class CollisionNode extends Node implements CollisionListener {
 
     @Override
     public void onCollision(GameObject gameObject, CollisionType collisionType) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'onCollision'");
     }
 }

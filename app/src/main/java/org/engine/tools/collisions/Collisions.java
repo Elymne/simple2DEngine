@@ -1,7 +1,10 @@
 package org.engine.tools.collisions;
 
 import java.util.ArrayList;
+
+import org.engine.gameobjects.Block;
 import org.engine.gameobjects.GameObject;
+import org.engine.gameobjects.StaticBlock;
 import org.engine.tools.physics.Physics;
 import org.engine.tools.physics.PhysicsListener;
 
@@ -43,12 +46,20 @@ public class Collisions implements PhysicsListener {
         gameObjects.remove(gameObject);
     }
 
-    private CollisionType checkCollision(GameObject gameObject1, GameObject gameObject2) {
-        if (gameObject1 == gameObject2) {
+    private CollisionType checkCollision(GameObject g1, GameObject g2) {
+        if (g1 == g2) {
             return CollisionType.NONE;
         }
 
-        // TODO : SOustrait les valeurs entre elles et check.
+        if (g1 instanceof Block == false && g1 instanceof StaticBlock == false) {
+            return CollisionType.NONE;
+        }
+
+        if (g2 instanceof Block == false && g2 instanceof StaticBlock == false) {
+            return CollisionType.NONE;
+        }
+
+        // final boolean c1 = g1.
 
         return CollisionType.NONE;
     }

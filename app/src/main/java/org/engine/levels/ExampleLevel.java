@@ -11,7 +11,7 @@ import org.engine.gameobjects.GameObject;
 public class ExampleLevel extends Level {
     public ExampleLevel() {
         super(new ArrayList<GameObject>(Arrays.asList(new GameObject[] {
-                new Block(10, 10, null)
+                new Block(10, 10, 40, 40, null)
         })));
     }
 
