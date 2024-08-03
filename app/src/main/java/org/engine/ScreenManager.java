@@ -7,11 +7,11 @@ import org.engine.levels.Level;
 import org.engine.tools.constants.Colors;
 import org.engine.tools.level.LevelEnum;
 import org.engine.tools.level.LevelSelector;
-import org.engine.tools.physics.FramePerSecond;
-import org.engine.tools.physics.Physics;
-import org.engine.tools.physics.PhysicsListener;
+import org.engine.tools.physics.time.FramePerSecond;
+import org.engine.tools.physics.time.Time;
+import org.engine.tools.physics.time.TimeListener;
 
-public class ScreenManager implements PhysicsListener {
+public class ScreenManager implements TimeListener {
     private final JFrame jFrame = new JFrame("Application");
     private Level currentLevel = null;
 
@@ -25,17 +25,17 @@ public class ScreenManager implements PhysicsListener {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
 
-        Physics.getInstance().addNewListener(this);
+        Time.getInstance().addNewListener(this);
     }
 
     public void setLevel(LevelEnum level) {
         try {
             currentLevel = LevelSelector.generateLevelFromIndex(level);
             jFrame.getContentPane().add(currentLevel);
-            Physics.getInstance().run(FramePerSecond.SIXTY_FPS);
+            Time.getInstance().run(FramePerSecond.SIXTY_FPS);
         } catch (Exception e) {
             currentLevel = null;
-            Physics.getInstance().pause();
+            Time.getInstance().pause();
             e.printStackTrace();
         }
     }
@@ -43,7 +43,7 @@ public class ScreenManager implements PhysicsListener {
     public void clearLevel() {
         jFrame.getContentPane().remove(currentLevel);
         currentLevel = null;
-        Physics.getInstance().pause();
+        Time.getInstance().pause();
     }
 
     @Override

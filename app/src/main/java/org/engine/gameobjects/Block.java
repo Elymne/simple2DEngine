@@ -1,26 +1,29 @@
 package org.engine.gameobjects;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 import javax.annotation.Nullable;
-import org.engine.nodes.SimplePhysicsNode;
-import org.engine.nodes.CollisionNode;
-import org.engine.nodes.Node;
+import org.engine.exceptions.NoPositionNodeException;
+import org.engine.nodes.PhysicsNode;
 import org.engine.nodes.PositionNode;
 import org.engine.tools.constants.Colors;
 
 public class Block extends GameObject {
-    public Block(double posX, double posY, double width, double height, @Nullable UUID key) {
+    protected Block(UUID key) {
         super(key);
-        final PositionNode positionNode = new PositionNode(posX, posY);
-        final CollisionNode collisionNode = new CollisionNode(this, width, height);
-        final SimplePhysicsNode simplePhysicsNode = new SimplePhysicsNode(positionNode, collisionNode);
+    }
 
-        this.nodes.addAll(new ArrayList<Node>(Arrays.asList(new Node[] {
-                positionNode, collisionNode, simplePhysicsNode
-        })));
+    static public Block build(double posX, double posY, double width, double height, @Nullable UUID key)
+            throws NoPositionNodeException {
+        final Block gameObject = new Block(key);
+
+        final PositionNode positionNode = new PositionNode(posX, posY);
+        gameObject.nodes.add(positionNode);
+
+        final PhysicsNode simplePhysicsNode = new PhysicsNode(gameObject, width, height, false);
+        gameObject.nodes.add(simplePhysicsNode);
+
+        return gameObject;
     }
 
     @Override
@@ -29,21 +32,22 @@ public class Block extends GameObject {
         g.drawRect(
                 (int) getPositionNode().posX,
                 (int) getPositionNode().posY,
-                (int) getCollisionNode().width,
-                (int) getCollisionNode().heigth);
+                (int) getPhysicsNode().width,
+                (int) getPhysicsNode().heigth);
         g.setColor(Colors.CUSTOM_RED);
         g.fillRect(
                 (int) getPositionNode().posX,
                 (int) getPositionNode().posY,
-                (int) getCollisionNode().width,
-                (int) getCollisionNode().heigth);
+                (int) getPhysicsNode().width,
+                (int) getPhysicsNode().heigth);
     }
 
     private PositionNode getPositionNode() {
         return (PositionNode) nodes.get(0);
     }
 
-    private CollisionNode getCollisionNode() {
-        return (CollisionNode) nodes.get(0);
+    private PhysicsNode getPhysicsNode() {
+        return (PhysicsNode) nodes.get(1);
     }
+
 }

@@ -1,29 +1,29 @@
-package org.engine.tools.physics;
+package org.engine.tools.physics.time;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Physics {
+public class Time {
     private Timer currentTimer = new Timer();
-    private PhysicsState state = PhysicsState.UNDEFINED;
-    private final ArrayList<PhysicsListener> physicsListeners = new ArrayList<PhysicsListener>();
+    private TimeState state = TimeState.UNDEFINED;
+    private final ArrayList<TimeListener> physicsListeners = new ArrayList<TimeListener>();
 
-    private static Physics instance;
+    private static Time instance;
 
-    public static Physics getInstance() {
+    public static Time getInstance() {
         if (instance == null) {
-            instance = new Physics();
+            instance = new Time();
         }
         return instance;
     }
 
     public void run(int fpsTarget) {
-        if (state == PhysicsState.RUNNING) {
+        if (state == TimeState.RUNNING) {
             System.err.println("Physics already running");
             return;
         }
-        state = PhysicsState.RUNNING;
+        state = TimeState.RUNNING;
         currentTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -33,24 +33,24 @@ public class Physics {
     }
 
     public void pause() {
-        if (state == PhysicsState.WAITING) {
+        if (state == TimeState.WAITING) {
             System.err.println("Physics already pausing");
             return;
         }
-        state = PhysicsState.WAITING;
+        state = TimeState.WAITING;
         currentTimer.cancel();
     }
 
-    public void addNewListener(PhysicsListener physicsListener) {
+    public void addNewListener(TimeListener physicsListener) {
         physicsListeners.add(physicsListener);
     }
 
-    public void removeListener(PhysicsListener physicsListener) {
+    public void removeListener(TimeListener physicsListener) {
         physicsListeners.remove(physicsListener);
     }
 
     private void notifyListeners(int fpsTarget) {
-        for (PhysicsListener physicsListener : physicsListeners) {
+        for (TimeListener physicsListener : physicsListeners) {
             physicsListener.onNextFrame(fpsTarget);
         }
     }
