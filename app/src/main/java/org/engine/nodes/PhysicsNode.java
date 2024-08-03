@@ -46,10 +46,16 @@ public class PhysicsNode extends Node implements CollisionListener {
         positionNode.posY = positionNode.posY + velocity * timeDelta;
     }
 
+    private void jumping(int timeDelta) {
+    }
+
+    private void moving(int deltaTime) {
+    }
+
     @Override
     public void listenCollision(ArrayList<GameObject> buffer, int timeDelta) {
         if (isJumping) {
-            // TODO : Manage jumping physics.
+            jumping(timeDelta);
             return;
         }
 
