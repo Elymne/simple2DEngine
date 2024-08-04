@@ -58,10 +58,10 @@ public class Collision implements TimeListener {
             return false;
         }
 
-        if (shape1.posX + shape1.width >= shape2.posX &&
-                shape1.posX <= shape2.posX + shape2.width &&
-                shape1.posY + shape1.height >= shape2.posY &&
-                shape1.posY <= shape2.posY + shape2.height) {
+        if (shape1.positionNode.posX + shape1.width >= shape2.positionNode.posX &&
+                shape1.positionNode.posX <= shape2.positionNode.posX + shape2.width &&
+                shape1.positionNode.posY + shape1.height >= shape2.positionNode.posY &&
+                shape1.positionNode.posY <= shape2.positionNode.posY + shape2.height) {
             return true;
         }
 

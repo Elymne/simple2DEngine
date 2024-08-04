@@ -1,9 +1,11 @@
 package org.engine.nodes.physics;
 
 import java.util.ArrayList;
+
 import org.engine.gameobjects.GameObject;
 import org.engine.nodes.Node;
 import org.engine.nodes.shapes.QuadShapeNode;
+import org.engine.tools.constants.CustomErrors;
 import org.engine.tools.physics.collision.Collision;
 import org.engine.tools.physics.collision.CollisionListener;
 
@@ -20,8 +22,7 @@ public class PhysicsNode extends Node implements CollisionListener {
     public PhysicsNode(GameObject gameObject, boolean isStatic) {
         final QuadShapeNode shapeNode = (QuadShapeNode) gameObject.findNode(QuadShapeNode.class);
         if (shapeNode == null) {
-            System.err.println(
-                    "Physics Node hasn't been set, you have to use a shape node to the game object to be able to use physics.");
+            System.err.println(CustomErrors.NO_QUAD_SHAPE_FOUND);
             return;
         }
 
@@ -40,7 +41,7 @@ public class PhysicsNode extends Node implements CollisionListener {
         } else if (velocity > velocityThreshold) {
             velocity = velocityThreshold;
         }
-        shapeNode.posY = shapeNode.posY + velocity * timeDelta;
+        shapeNode.positionNode.posY = shapeNode.positionNode.posY + velocity * timeDelta;
     }
 
     private void jumping(int timeDelta) {
@@ -67,8 +68,9 @@ public class PhysicsNode extends Node implements CollisionListener {
         }
 
         final QuadShapeNode firstCollisionShape = (QuadShapeNode) buffer.getFirst().findNode(QuadShapeNode.class);
-        if (firstCollisionShape != null && shapeNode.posY + shapeNode.height >= firstCollisionShape.posY) {
-            shapeNode.posY = firstCollisionShape.posY - shapeNode.height;
+        if (firstCollisionShape != null
+                && shapeNode.positionNode.posY + shapeNode.height >= firstCollisionShape.positionNode.posY) {
+            shapeNode.positionNode.posY = firstCollisionShape.positionNode.posY - shapeNode.height;
         }
 
         velocity = 0;
