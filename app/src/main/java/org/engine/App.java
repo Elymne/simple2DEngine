@@ -11,6 +11,7 @@ public class App {
         System.out.println("Launching App");
 
         final ScreenManager screenManager = new ScreenManager();
+
         screenManager.startScreen();
         screenManager.setLevel(LevelEnum.EXAMPLE_LEVEL);
     }

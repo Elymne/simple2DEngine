@@ -3,8 +3,8 @@ package org.engine.gameobjects;
 import java.awt.Graphics;
 import java.util.UUID;
 import javax.annotation.Nullable;
-import org.engine.nodes.PhysicsNode;
-import org.engine.nodes.ShapeNode;
+import org.engine.nodes.physics.PhysicsNode;
+import org.engine.nodes.shapes.QuadShapeNode;
 import org.engine.tools.constants.Colors;
 
 public class StaticBlock extends GameObject {
@@ -15,7 +15,7 @@ public class StaticBlock extends GameObject {
     static public StaticBlock build(double posX, double posY, double width, double height, @Nullable UUID key) {
         final StaticBlock gameObject = new StaticBlock(key);
 
-        final ShapeNode shapeNode = new ShapeNode(posX, posY, width, height);
+        final QuadShapeNode shapeNode = new QuadShapeNode(posX, posY, width, height, Colors.CUSTOM_BLUE);
         gameObject.nodes.add(shapeNode);
 
         final PhysicsNode simplePhysicsNode = new PhysicsNode(gameObject, true);
@@ -26,22 +26,10 @@ public class StaticBlock extends GameObject {
 
     @Override
     public void paint(Graphics g) {
-        g.setColor(Colors.CUSTOM_BLUE.darker());
-        g.drawRect(
-                (int) getPositionNode().posX,
-                (int) getPositionNode().posY,
-                (int) getPositionNode().width,
-                (int) getPositionNode().height);
-        g.setColor(Colors.CUSTOM_BLUE);
-        g.fillRect(
-                (int) getPositionNode().posX,
-                (int) getPositionNode().posY,
-                (int) getPositionNode().width,
-                (int) getPositionNode().height);
-    }
-
-    private ShapeNode getPositionNode() {
-        return (ShapeNode) nodes.get(0);
+        final QuadShapeNode quadShapeNode = (QuadShapeNode) findNode(QuadShapeNode.class);
+        if (quadShapeNode != null) {
+            quadShapeNode.draw(g);
+        }
     }
 
 }

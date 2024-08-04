@@ -2,8 +2,8 @@ package org.engine.tools.physics.collision;
 
 import java.util.ArrayList;
 import org.engine.gameobjects.GameObject;
-import org.engine.nodes.PhysicsNode;
-import org.engine.nodes.ShapeNode;
+import org.engine.nodes.physics.PhysicsNode;
+import org.engine.nodes.shapes.QuadShapeNode;
 import org.engine.tools.physics.time.Time;
 import org.engine.tools.physics.time.TimeListener;
 
@@ -51,8 +51,8 @@ public class Collision implements TimeListener {
             return false;
         }
 
-        final ShapeNode shape1 = (ShapeNode) g1.findNode(ShapeNode.class);
-        final ShapeNode shape2 = (ShapeNode) g2.findNode(ShapeNode.class);
+        final QuadShapeNode shape1 = (QuadShapeNode) g1.findNode(QuadShapeNode.class);
+        final QuadShapeNode shape2 = (QuadShapeNode) g2.findNode(QuadShapeNode.class);
 
         if (shape1 == null || shape2 == null) {
             return false;

@@ -10,6 +10,7 @@ import org.engine.tools.level.LevelSelector;
 import org.engine.tools.physics.time.FramePerSecond;
 import org.engine.tools.physics.time.Time;
 import org.engine.tools.physics.time.TimeListener;
+import org.engine.tools.screen.UnitSizeManager;
 
 public class ScreenManager implements TimeListener {
     private final JFrame jFrame = new JFrame("Application");
@@ -25,6 +26,7 @@ public class ScreenManager implements TimeListener {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
 
+        UnitSizeManager.generateByAxisX(100);
         Time.getInstance().addNewListener(this);
     }
 
