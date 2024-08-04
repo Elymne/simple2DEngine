@@ -10,9 +10,9 @@ import org.engine.tools.physics.collision.Collision;
 import org.engine.tools.physics.collision.CollisionListener;
 
 public class PhysicsNode extends Node implements CollisionListener {
-    private QuadShapeNode shapeNode;
     public boolean isStatic;
 
+    private QuadShapeNode shapeNode;
     private double velocity = 0;
     private double velocityExpo = 0.002;
     private double velocityThreshold = 0.08;

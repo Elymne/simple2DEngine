@@ -13,15 +13,9 @@ public class QuadShapeNode extends Node {
     public PositionNode positionNode;
     public double width;
     public double height;
-
-    @Nullable
-    public Color backgroundColor;
-
-    @Nullable
-    public Color borderColor;
-
-    @Nullable
-    public String imagePath;
+    public @Nullable Color backgroundColor;
+    public @Nullable Color borderColor;
+    public @Nullable String imagePath;
 
     public QuadShapeNode(GameObject gameObject, double width, double height) {
         final PositionNode positionNode = (PositionNode) gameObject.findNode(PositionNode.class);
@@ -33,40 +27,6 @@ public class QuadShapeNode extends Node {
         this.positionNode = positionNode;
         this.width = width;
         this.height = height;
-    }
-
-    public QuadShapeNode(GameObject gameObject, double width, double height, Color... colors) {
-        final PositionNode positionNode = (PositionNode) gameObject.findNode(PositionNode.class);
-        if (positionNode == null) {
-            System.err.println(CustomErrors.NO_POSITION_FOUND);
-            return;
-        }
-
-        this.positionNode = positionNode;
-        this.width = width;
-        this.height = height;
-
-        if (colors.length == 1) {
-            this.borderColor = colors[0];
-        }
-
-        if (colors.length == 2) {
-            this.borderColor = colors[0];
-            this.backgroundColor = colors[1];
-        }
-    }
-
-    public QuadShapeNode(GameObject gameObject, double width, double height, String imageUri) {
-        final PositionNode positionNode = (PositionNode) gameObject.findNode(PositionNode.class);
-        if (positionNode == null) {
-            System.err.println(CustomErrors.NO_POSITION_FOUND);
-            return;
-        }
-
-        this.positionNode = positionNode;
-        this.width = width;
-        this.height = height;
-        this.imagePath = imageUri;
     }
 
     public void draw(Graphics g) {

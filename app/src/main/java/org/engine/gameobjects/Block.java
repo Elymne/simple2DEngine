@@ -20,10 +20,8 @@ public class Block extends GameObject {
         final PositionNode positionNode = new PositionNode(posX, posY);
         gameObject.nodes.add(positionNode);
 
-        final QuadShapeNode shapeNode = new QuadShapeNode(gameObject,
-                width, height,
-                Colors.CUSTOM_RED.darker(),
-                Colors.CUSTOM_RED);
+        final QuadShapeNode shapeNode = new QuadShapeNode(gameObject, width, height);
+        shapeNode.backgroundColor = Colors.CUSTOM_RED;
         gameObject.nodes.add(shapeNode);
 
         final PhysicsNode physicsNode = new PhysicsNode(gameObject, false);

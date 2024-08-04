@@ -20,10 +20,8 @@ public class StaticBlock extends GameObject {
         final PositionNode positionNode = new PositionNode(posX, posY);
         gameObject.nodes.add(positionNode);
 
-        final QuadShapeNode shapeNode = new QuadShapeNode(gameObject,
-                width, height,
-                Colors.CUSTOM_BLUE.darker(),
-                Colors.CUSTOM_BLUE);
+        final QuadShapeNode shapeNode = new QuadShapeNode(gameObject, width, height);
+        shapeNode.backgroundColor = Colors.CUSTOM_BLUE;
         gameObject.nodes.add(shapeNode);
 
         final PhysicsNode simplePhysicsNode = new PhysicsNode(gameObject, true);
