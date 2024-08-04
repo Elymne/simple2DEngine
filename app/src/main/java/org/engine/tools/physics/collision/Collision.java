@@ -3,7 +3,7 @@ package org.engine.tools.physics.collision;
 import java.util.ArrayList;
 import org.engine.gameobjects.GameObject;
 import org.engine.nodes.PhysicsNode;
-import org.engine.nodes.PositionNode;
+import org.engine.nodes.ShapeNode;
 import org.engine.tools.physics.time.Time;
 import org.engine.tools.physics.time.TimeListener;
 
@@ -51,20 +51,17 @@ public class Collision implements TimeListener {
             return false;
         }
 
-        final PositionNode positionNode1 = (PositionNode) g1.findNode(PositionNode.class);
-        final PositionNode positionNode2 = (PositionNode) g2.findNode(PositionNode.class);
+        final ShapeNode shape1 = (ShapeNode) g1.findNode(ShapeNode.class);
+        final ShapeNode shape2 = (ShapeNode) g2.findNode(ShapeNode.class);
 
-        final PhysicsNode physicsNode1 = (PhysicsNode) g1.findNode(PhysicsNode.class);
-        final PhysicsNode physicsNode2 = (PhysicsNode) g2.findNode(PhysicsNode.class);
-
-        if (physicsNode1 == null || physicsNode2 == null || positionNode1 == null || positionNode2 == null) {
+        if (shape1 == null || shape2 == null) {
             return false;
         }
 
-        if (positionNode1.posX + physicsNode1.width >= positionNode2.posX &&
-                positionNode1.posX <= positionNode2.posX + physicsNode2.width &&
-                positionNode1.posY + physicsNode1.heigth >= positionNode2.posY &&
-                positionNode1.posY <= positionNode2.posY + physicsNode2.heigth) {
+        if (shape1.posX + shape1.width >= shape2.posX &&
+                shape1.posX <= shape2.posX + shape2.width &&
+                shape1.posY + shape1.height >= shape2.posY &&
+                shape1.posY <= shape2.posY + shape2.height) {
             return true;
         }
 

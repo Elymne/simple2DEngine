@@ -1,34 +1,29 @@
 package org.engine.nodes;
 
 import java.util.ArrayList;
-import org.engine.exceptions.NoPositionNodeException;
 import org.engine.gameobjects.GameObject;
 import org.engine.tools.physics.collision.Collision;
 import org.engine.tools.physics.collision.CollisionListener;
 
 public class PhysicsNode extends Node implements CollisionListener {
-    public final double width;
-    public final double heigth;
-    public final boolean isStatic;
-    private final PositionNode positionNode;
+    private ShapeNode shapeNode;
+    public boolean isStatic;
 
     private double velocity = 0;
     private double velocityThreshold = 0.2;
     private boolean isJumping = false;
+    private boolean isMoving = false;
 
-    public PhysicsNode(GameObject gameObject, double width, double heigth, boolean isStatic)
-            throws NoPositionNodeException {
-
-        final PositionNode positionNode = (PositionNode) gameObject.findNode(PositionNode.class);
-        if (positionNode == null) {
-            throw new NoPositionNodeException(gameObject);
+    public PhysicsNode(GameObject gameObject, boolean isStatic) {
+        final ShapeNode shapeNode = (ShapeNode) gameObject.findNode(ShapeNode.class);
+        if (shapeNode == null) {
+            System.err.println(
+                    "Physics Node hasn't been set, you have to use a shape node to the game object to be able to use physics.");
+            return;
         }
 
-        this.positionNode = positionNode;
-        this.width = width;
-        this.heigth = heigth;
+        this.shapeNode = shapeNode;
         this.isStatic = isStatic;
-
         Collision.getInstance().addNewGameObject(gameObject);
     }
 
@@ -36,14 +31,13 @@ public class PhysicsNode extends Node implements CollisionListener {
         return velocity;
     }
 
-    // TODO : Rework this.
     private void falling(int timeDelta) {
         if (velocity < velocityThreshold) {
             velocity += 0.04;
         } else if (velocity > velocityThreshold) {
             velocity = velocityThreshold;
         }
-        positionNode.posY = positionNode.posY + velocity * timeDelta;
+        shapeNode.posY = shapeNode.posY + velocity * timeDelta;
     }
 
     private void jumping(int timeDelta) {
@@ -59,14 +53,19 @@ public class PhysicsNode extends Node implements CollisionListener {
             return;
         }
 
+        if (isMoving) {
+            moving(timeDelta);
+            return;
+        }
+
         if (buffer.size() == 0) {
             falling(timeDelta);
             return;
         }
 
-        final PositionNode firstCollisionPosition = (PositionNode) buffer.getFirst().findNode(PositionNode.class);
-        if (firstCollisionPosition != null && positionNode.posY + heigth >= firstCollisionPosition.posY) {
-            positionNode.posY = firstCollisionPosition.posY - heigth;
+        final ShapeNode firstCollisionShape = (ShapeNode) buffer.getFirst().findNode(ShapeNode.class);
+        if (firstCollisionShape != null && shapeNode.posY + shapeNode.height >= firstCollisionShape.posY) {
+            shapeNode.posY = firstCollisionShape.posY - shapeNode.height;
         }
 
         velocity = 0;
