@@ -15,7 +15,8 @@ public class Block extends GameObject {
     static public Block build(double posX, double posY, double width, double height, @Nullable UUID key) {
         final Block gameObject = new Block(key);
 
-        final QuadShapeNode shapeNode = new QuadShapeNode(posX, posY, width, height, Colors.CUSTOM_RED);
+        final QuadShapeNode shapeNode = new QuadShapeNode(posX, posY, width, height, Colors.CUSTOM_RED.darker(),
+                Colors.CUSTOM_RED);
         gameObject.nodes.add(shapeNode);
 
         final PhysicsNode physicsNode = new PhysicsNode(gameObject, false);

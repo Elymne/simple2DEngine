@@ -12,7 +12,7 @@ import org.engine.gameobjects.StaticBlock;
 public class ExampleLevel extends Level {
     public ExampleLevel() {
         super(new ArrayList<GameObject>(Arrays.asList(new GameObject[] {
-                Block.build(10, 0, 1, 1, null),
+                Block.build(10, 0, 3, 3, null),
                 StaticBlock.build(0, 40, 100, 4, null),
         })));
     }

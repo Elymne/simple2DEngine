@@ -12,7 +12,8 @@ public class PhysicsNode extends Node implements CollisionListener {
     public boolean isStatic;
 
     private double velocity = 0;
-    private double velocityThreshold = 0.2;
+    private double velocityExpo = 0.002;
+    private double velocityThreshold = 0.08;
     private boolean isJumping = false;
     private boolean isMoving = false;
 
@@ -35,7 +36,7 @@ public class PhysicsNode extends Node implements CollisionListener {
 
     private void falling(int timeDelta) {
         if (velocity < velocityThreshold) {
-            velocity += 0.04;
+            velocity += velocityExpo;
         } else if (velocity > velocityThreshold) {
             velocity = velocityThreshold;
         }
