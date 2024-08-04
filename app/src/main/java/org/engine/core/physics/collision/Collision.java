@@ -1,11 +1,12 @@
-package org.engine.tools.physics.collision;
+package org.engine.core.physics.collision;
 
 import java.util.ArrayList;
+
+import org.engine.core.physics.time.Time;
+import org.engine.core.physics.time.TimeListener;
 import org.engine.gameobjects.GameObject;
 import org.engine.nodes.physics.PhysicsNode;
 import org.engine.nodes.shapes.QuadShapeNode;
-import org.engine.tools.physics.time.Time;
-import org.engine.tools.physics.time.TimeListener;
 
 public class Collision implements TimeListener {
     private static Collision instance;

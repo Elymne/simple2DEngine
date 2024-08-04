@@ -1,4 +1,4 @@
-package org.engine.tools.physics.collision;
+package org.engine.core.physics.collision;
 
 import java.util.ArrayList;
 

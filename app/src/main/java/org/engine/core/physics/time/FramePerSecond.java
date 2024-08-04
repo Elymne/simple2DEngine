@@ -1,4 +1,4 @@
-package org.engine.tools.physics.time;
+package org.engine.core.physics.time;
 
 public final class FramePerSecond {
     public static final int SIXTY_FPS = 16;

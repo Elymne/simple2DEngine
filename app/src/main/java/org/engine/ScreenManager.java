@@ -3,14 +3,15 @@ package org.engine;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+
+import org.engine.core.constants.Colors;
+import org.engine.core.level.LevelEnum;
+import org.engine.core.level.LevelSelector;
+import org.engine.core.physics.time.FramePerSecond;
+import org.engine.core.physics.time.Time;
+import org.engine.core.physics.time.TimeListener;
+import org.engine.core.screen.UnitSizeManager;
 import org.engine.levels.Level;
-import org.engine.tools.constants.Colors;
-import org.engine.tools.level.LevelEnum;
-import org.engine.tools.level.LevelSelector;
-import org.engine.tools.physics.time.FramePerSecond;
-import org.engine.tools.physics.time.Time;
-import org.engine.tools.physics.time.TimeListener;
-import org.engine.tools.screen.UnitSizeManager;
 
 public class ScreenManager implements TimeListener {
     private final JFrame jFrame = new JFrame("Application");

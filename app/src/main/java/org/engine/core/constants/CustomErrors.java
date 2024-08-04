@@ -1,4 +1,4 @@
-package org.engine.tools.constants;
+package org.engine.core.constants;
 
 public final class CustomErrors {
     public static final String NO_QUAD_SHAPE_FOUND = "Physics Node hasn't been set, you have to use a shape node to the game object.";

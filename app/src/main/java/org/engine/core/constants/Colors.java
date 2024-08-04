@@ -1,4 +1,4 @@
-package org.engine.tools.constants;
+package org.engine.core.constants;
 
 import java.awt.Color;
 

@@ -1,4 +1,4 @@
-package org.engine.tools.level;
+package org.engine.core.level;
 
 import org.engine.exceptions.LevelNotFound;
 import org.engine.levels.ExampleLevel;

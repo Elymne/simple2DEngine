@@ -1,6 +1,6 @@
 package org.engine.exceptions;
 
-import org.engine.tools.level.LevelEnum;
+import org.engine.core.level.LevelEnum;
 
 public class LevelNotFound extends Exception {
     public LevelNotFound(LevelEnum level) {

@@ -1,4 +1,4 @@
-package org.engine.tools.screen;
+package org.engine.core.screen;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;

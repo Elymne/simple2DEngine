@@ -3,11 +3,13 @@ package org.engine.nodes.shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.annotation.Nullable;
+
+import org.engine.core.constants.CustomErrors;
+import org.engine.core.screen.CameraManager;
+import org.engine.core.screen.UnitSizeManager;
 import org.engine.gameobjects.GameObject;
 import org.engine.nodes.Node;
 import org.engine.nodes.camera.PositionNode;
-import org.engine.tools.constants.CustomErrors;
-import org.engine.tools.screen.UnitSizeManager;
 
 public class QuadShapeNode extends Node {
     public PositionNode positionNode;
@@ -31,23 +33,24 @@ public class QuadShapeNode extends Node {
 
     public void draw(Graphics g) {
         final UnitSizeManager unitM = UnitSizeManager.getInstance();
+        final CameraManager cameraM = CameraManager.getInstance();
 
         if (borderColor != null) {
             g.setColor(borderColor);
             g.drawRect(
-                    (int) (positionNode.posX * unitM.getxUnitPixels()),
-                    (int) (positionNode.posY * unitM.getyUnitPixels()),
-                    (int) (width * unitM.getxUnitPixels()),
-                    (int) (height * unitM.getyUnitPixels()));
+                    (int) (positionNode.posX * unitM.getxUnitPixels() - cameraM.getPositionX()),
+                    (int) (positionNode.posY * unitM.getyUnitPixels() - cameraM.getPositionY()),
+                    (int) (width * unitM.getxUnitPixels() - cameraM.getPositionX()),
+                    (int) (height * unitM.getyUnitPixels() - cameraM.getPositionY()));
         }
 
         if (backgroundColor != null) {
             g.setColor(backgroundColor);
             g.fillRect(
-                    (int) (positionNode.posX * unitM.getxUnitPixels()),
-                    (int) (positionNode.posY * unitM.getyUnitPixels()),
-                    (int) (width * unitM.getxUnitPixels()),
-                    (int) (height * unitM.getyUnitPixels()));
+                    (int) (positionNode.posX * unitM.getxUnitPixels() - cameraM.getPositionX()),
+                    (int) (positionNode.posY * unitM.getyUnitPixels() - cameraM.getPositionY()),
+                    (int) (width * unitM.getxUnitPixels() - cameraM.getPositionX()),
+                    (int) (height * unitM.getyUnitPixels() - cameraM.getPositionY()));
         }
     }
 }

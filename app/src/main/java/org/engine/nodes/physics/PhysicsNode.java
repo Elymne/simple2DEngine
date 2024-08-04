@@ -2,12 +2,12 @@ package org.engine.nodes.physics;
 
 import java.util.ArrayList;
 
+import org.engine.core.constants.CustomErrors;
+import org.engine.core.physics.collision.Collision;
+import org.engine.core.physics.collision.CollisionListener;
 import org.engine.gameobjects.GameObject;
 import org.engine.nodes.Node;
 import org.engine.nodes.shapes.QuadShapeNode;
-import org.engine.tools.constants.CustomErrors;
-import org.engine.tools.physics.collision.Collision;
-import org.engine.tools.physics.collision.CollisionListener;
 
 public class PhysicsNode extends Node implements CollisionListener {
     public boolean isStatic;
