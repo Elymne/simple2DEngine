@@ -70,7 +70,7 @@ public class PhysicsNode extends Characteristic implements PhysicsListener {
 
         if (isJumping) {
             jumping(timeDelta);
-            return;G
+            return;
         }
 
         if (buffer.size() == 0) {
