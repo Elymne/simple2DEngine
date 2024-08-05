@@ -1,6 +1,7 @@
 package org.engine;
 
-import org.engine.core.level.LevelEnum;
+import org.engine.application.Screen;
+import org.engine.application.levels.tools.LevelEnum;
 
 public class App {
     String getGreeting() {
@@ -10,8 +11,7 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Launching App");
 
-        final ScreenManager screenManager = new ScreenManager();
-
+        final Screen screenManager = new Screen();
         screenManager.startScreen();
         screenManager.setLevel(LevelEnum.EXAMPLE_LEVEL);
     }
