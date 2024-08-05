@@ -36,7 +36,7 @@ public class CameraRule {
     }
 
     public double getDistFromCamY(double posY) {
-        return (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2) + (posY - focus.posX);
+        return (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2) + (-posY - focus.posY);
     }
 
     public int getPxRelPosX(double posX) {
@@ -50,7 +50,7 @@ public class CameraRule {
     public int getPxRelPosY(double posY) {
         final double pixelsPerUnit = MetricRule.getInstance().getyUnitPixels();
         final double camPixelPos = Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2;
-        final double distanceFromCam = (posY - focus.posY);
+        final double distanceFromCam = (-posY + focus.posY);
 
         return (int) (distanceFromCam * pixelsPerUnit + camPixelPos);
     }

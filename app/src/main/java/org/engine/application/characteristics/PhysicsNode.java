@@ -41,14 +41,10 @@ public class PhysicsNode extends Characteristic implements PhysicsListener {
     private void falling(int timeDelta) {
         if (velocityY > -fallingThreshold) {
             velocityY -= fallingAdditivity;
-            shapeNode.positionNode.posY = shapeNode.positionNode.posY + velocityY * timeDelta;
-            return;
         }
 
         if (velocityY < -fallingThreshold) {
             velocityY = -fallingThreshold;
-            shapeNode.positionNode.posY = shapeNode.positionNode.posY + velocityY * timeDelta;
-            return;
         }
 
         shapeNode.positionNode.posY = shapeNode.positionNode.posY + velocityY * timeDelta;
@@ -79,10 +75,13 @@ public class PhysicsNode extends Characteristic implements PhysicsListener {
         }
 
         final QuadShapeNode firstCollisionShape = (QuadShapeNode) buffer.getFirst().findNode(QuadShapeNode.class);
-        if (firstCollisionShape != null
-                && shapeNode.positionNode.posY + shapeNode.height >= firstCollisionShape.positionNode.posY) {
-            shapeNode.positionNode.posY = firstCollisionShape.positionNode.posY - shapeNode.height;
-        }
+
+        // if (firstCollisionShape != null
+        // && -shapeNode.positionNode.posY + shapeNode.height <=
+        // -firstCollisionShape.positionNode.posY) {
+        // shapeNode.positionNode.posY = -firstCollisionShape.positionNode.posY -
+        // shapeNode.height;
+        // }
 
         velocityY = 0;
     }

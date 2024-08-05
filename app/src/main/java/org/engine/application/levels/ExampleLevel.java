@@ -13,7 +13,7 @@ import org.engine.core.Level;
 public class ExampleLevel extends Level {
     public ExampleLevel() {
         super(new ArrayList<Element>(Arrays.asList(new Element[] {
-                Block.build(50, -20, 3, 3, null),
+                Block.build(50, 60, 3, 3, null),
                 StaticBlock.build(0, 0, 100, 4, null),
         })));
     }
