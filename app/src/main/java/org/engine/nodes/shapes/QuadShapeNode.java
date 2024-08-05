@@ -35,22 +35,19 @@ public class QuadShapeNode extends Node {
         final UnitSizeManager unitM = UnitSizeManager.getInstance();
         final CameraManager cameraM = CameraManager.getInstance();
 
+        final int posX = cameraM.getPxRelPosX(positionNode.posX);
+        final int posY = cameraM.getPxRelPosY(positionNode.posY);
+        final int width = (int) (this.width * unitM.getxUnitPixels());
+        final int height = (int) (this.height * unitM.getyUnitPixels());
+
         if (borderColor != null) {
             g.setColor(borderColor);
-            g.drawRect(
-                    (int) (positionNode.posX * unitM.getxUnitPixels() - cameraM.getPositionX()),
-                    (int) (positionNode.posY * unitM.getyUnitPixels() - cameraM.getPositionY()),
-                    (int) (width * unitM.getxUnitPixels() - cameraM.getPositionX()),
-                    (int) (height * unitM.getyUnitPixels() - cameraM.getPositionY()));
+            g.drawRect(posX, posY, width, height);
         }
 
         if (backgroundColor != null) {
             g.setColor(backgroundColor);
-            g.fillRect(
-                    (int) (positionNode.posX * unitM.getxUnitPixels() - cameraM.getPositionX()),
-                    (int) (positionNode.posY * unitM.getyUnitPixels() - cameraM.getPositionY()),
-                    (int) (width * unitM.getxUnitPixels() - cameraM.getPositionX()),
-                    (int) (height * unitM.getyUnitPixels() - cameraM.getPositionY()));
+            g.fillRect(posX, posY, width, height);
         }
     }
 }

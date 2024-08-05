@@ -27,7 +27,7 @@ public class ScreenManager implements TimeListener {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
 
-        UnitSizeManager.generateByAxisX(100);
+        UnitSizeManager.generateByWidth(140);
         Time.getInstance().addNewListener(this);
     }
 
