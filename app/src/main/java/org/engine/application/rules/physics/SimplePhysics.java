@@ -65,6 +65,6 @@ public class SimplePhysics implements TimeListener {
             return true;
         }
 
-        return false;G
+        return false;
     }
 }
