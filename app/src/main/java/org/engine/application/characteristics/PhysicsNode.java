@@ -12,9 +12,13 @@ public class PhysicsNode extends Characteristic implements PhysicsListener {
     public boolean isStatic;
 
     private QuadShapeNode shapeNode;
-    private double velocity = 0;
-    private double velocityExpo = 0.002;
-    private double velocityThreshold = 0.08;
+
+    private double velocityY = 0;
+    private double velocityX = 0;
+
+    private double fallingAdditivity = 0.002;
+    private double fallingThreshold = 0.08;
+
     private boolean isJumping = false;
     private boolean isMoving = false;
 
@@ -30,17 +34,26 @@ public class PhysicsNode extends Characteristic implements PhysicsListener {
         SimplePhysics.getInstance().addNewGameObject(gameObject);
     }
 
-    public double getVelocity() {
-        return velocity;
+    public double getVelocityY() {
+        return velocityY;
     }
 
     private void falling(int timeDelta) {
-        if (velocity < velocityThreshold) {
-            velocity += velocityExpo;
-        } else if (velocity > velocityThreshold) {
-            velocity = velocityThreshold;
+        if (velocityY > -fallingThreshold) {
+            velocityY -= fallingAdditivity;
+            shapeNode.positionNode.posY = shapeNode.positionNode.posY + velocityY * timeDelta;
+            return;
         }
-        shapeNode.positionNode.posY = shapeNode.positionNode.posY + velocity * timeDelta;
+
+        if (velocityY < -fallingThreshold) {
+            velocityY = -fallingThreshold;
+            shapeNode.positionNode.posY = shapeNode.positionNode.posY + velocityY * timeDelta;
+            return;
+        }
+
+        shapeNode.positionNode.posY = shapeNode.positionNode.posY + velocityY * timeDelta;
+        return;
+
     }
 
     private void jumping(int timeDelta) {
@@ -51,14 +64,13 @@ public class PhysicsNode extends Characteristic implements PhysicsListener {
 
     @Override
     public void listenCollision(ArrayList<Element> buffer, int timeDelta) {
-        if (isJumping) {
-            jumping(timeDelta);
-            return;
-        }
-
         if (isMoving) {
             moving(timeDelta);
-            return;
+        }
+
+        if (isJumping) {
+            jumping(timeDelta);
+            return;G
         }
 
         if (buffer.size() == 0) {
@@ -72,6 +84,6 @@ public class PhysicsNode extends Characteristic implements PhysicsListener {
             shapeNode.positionNode.posY = firstCollisionShape.positionNode.posY - shapeNode.height;
         }
 
-        velocity = 0;
+        velocityY = 0;
     }
 }
