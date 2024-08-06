@@ -1,7 +1,7 @@
 package org.engine.core.rules.camera;
 
-import org.engine.application.characteristics.Position;
-import org.engine.constants.CustomErrors;
+import org.engine.core.characteristics.Position;
+import org.engine.core.constants.CustomErrors;
 import org.engine.core.elements.Element;
 import org.engine.core.rules.metric.MetricRule;
 

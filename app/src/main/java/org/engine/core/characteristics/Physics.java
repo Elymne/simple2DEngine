@@ -1,8 +1,8 @@
-package org.engine.application.characteristics;
+package org.engine.core.characteristics;
 
 import java.util.ArrayList;
-import org.engine.constants.CustomErrors;
-import org.engine.core.characteristics.Characteristic;
+
+import org.engine.core.constants.CustomErrors;
 import org.engine.core.elements.Element;
 import org.engine.core.rules.physics.PhysicsListener;
 import org.engine.core.rules.physics.SimplePhysics;

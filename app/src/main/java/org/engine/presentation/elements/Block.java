@@ -1,11 +1,12 @@
-package org.engine.application.elements;
+package org.engine.presentation.elements;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.annotation.Nullable;
-import org.engine.application.characteristics.Physics;
-import org.engine.application.characteristics.Position;
-import org.engine.application.characteristics.QuadShape;
+
+import org.engine.core.characteristics.Physics;
+import org.engine.core.characteristics.Position;
+import org.engine.core.characteristics.QuadShape;
 import org.engine.core.elements.Element;
 import org.engine.core.rules.camera.CameraRule;
 

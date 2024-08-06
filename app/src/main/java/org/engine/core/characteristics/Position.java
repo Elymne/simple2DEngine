@@ -1,6 +1,4 @@
-package org.engine.application.characteristics;
-
-import org.engine.core.characteristics.Characteristic;
+package org.engine.core.characteristics;
 
 public class Position extends Characteristic {
     public double posX;

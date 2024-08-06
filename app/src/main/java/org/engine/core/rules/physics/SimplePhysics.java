@@ -1,8 +1,9 @@
 package org.engine.core.rules.physics;
 
 import java.util.ArrayList;
-import org.engine.application.characteristics.Physics;
-import org.engine.application.characteristics.QuadShape;
+
+import org.engine.core.characteristics.Physics;
+import org.engine.core.characteristics.QuadShape;
 import org.engine.core.elements.Element;
 import org.engine.core.rules.time.TimeListener;
 import org.engine.core.rules.time.TimeRule;

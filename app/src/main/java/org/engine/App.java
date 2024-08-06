@@ -1,6 +1,6 @@
 package org.engine;
 
-import org.engine.application.Screen;
+import org.engine.presentation.Screen;
 
 public class App {
 

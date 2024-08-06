@@ -1,14 +1,15 @@
-package org.engine.application.levels;
+package org.engine.presentation.levels;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
-import org.engine.application.elements.Block;
-import org.engine.application.elements.StaticBlock;
+
 import org.engine.core.elements.Element;
 import org.engine.core.levels.Level;
+import org.engine.presentation.elements.Block;
+import org.engine.presentation.elements.StaticBlock;
 
 public class ExampleLevel extends Level {
     public ExampleLevel() {

@@ -1,14 +1,15 @@
-package org.engine.application;
+package org.engine.presentation;
 
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import org.engine.application.levels.ExampleLevel;
+
 import org.engine.core.levels.Level;
 import org.engine.core.rules.metric.MetricRule;
 import org.engine.core.rules.time.TimeListener;
 import org.engine.core.rules.time.TimeRule;
+import org.engine.presentation.levels.ExampleLevel;
 
 public class Screen implements TimeListener {
     private final JFrame jFrame = new JFrame("Application");
@@ -49,7 +50,6 @@ public class Screen implements TimeListener {
 
     @Override
     public void onNextFrame(int time) {
-        System.out.println(Toolkit.getDefaultToolkit().getScreenSize().width);
         if (currentLevel != null) {
             currentLevel.repaint();
             currentLevel.revalidate();
