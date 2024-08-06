@@ -22,7 +22,8 @@ public class CameraRule {
             System.err.println(CustomErrors.NO_POSITION_FOUND);
             return;
         }
-        this.focus = positionNode;
+        focus = positionNode;
+        System.out.println("test");
     }
 
     public double getDistFromFocus_X(double posX) {
@@ -32,6 +33,6 @@ public class CameraRule {
 
     public double getDistFromFocus_Y(double posY) {
         final ViewportRule viewPort = ViewportRule.getInstance();
-        return (viewPort.getScreenHeight() / 2) + (-posY - focus.getPosX());
+        return (viewPort.getScreenHeight() / 2) + (-posY + focus.getPosY());
     }
 }

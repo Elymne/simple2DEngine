@@ -8,7 +8,7 @@ import org.engine.core.rules.physics.SimplePhysicsRule;
 
 public class Physics extends Characteristic implements PhysicsListener {
     private QuadShape shape;
-    private double fallingSpeed = 0.1;
+    private double fallingSpeed = 1;
     private boolean isStatic;
 
     public Physics(Element gameObject, boolean isStatic) {
@@ -44,7 +44,7 @@ public class Physics extends Characteristic implements PhysicsListener {
 
         final QuadShape firstShape = (QuadShape) buffer.getFirst().findCharacteristic(QuadShape.class);
         if (firstShape != null && shape.getPointY() - shape.getHeight() < firstShape.getPointY()) {
-            shape.updatePosY(firstShape.getPointY() + shape.getHeight() * 1.5);
+            shape.updatePosY(firstShape.getPointY() + shape.getHeight() * 0.5);
         }
     }
 }

@@ -70,7 +70,7 @@ public class QuadShape extends Shape {
     }
 
     public double getPointY() {
-        return positionNode.getPosY() - (height / 2);
+        return positionNode.getPosY() + (height / 2);
     }
 
     @Override
