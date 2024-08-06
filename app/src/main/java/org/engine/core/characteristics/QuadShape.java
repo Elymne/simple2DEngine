@@ -5,13 +5,14 @@ import java.awt.Graphics;
 import javax.annotation.Nullable;
 import org.engine.core.constants.CustomErrors;
 import org.engine.core.elements.Element;
+import org.engine.core.rules.camera.CameraRule;
 
 public class QuadShape extends Shape {
-    public double width;
-    public double height;
-    public @Nullable Color backgroundColor;
-    public @Nullable Color borderColor;
-    public @Nullable String imagePath;
+    private double width;
+    private double height;
+    private @Nullable Color backgroundColor;
+    private @Nullable Color borderColor;
+    private @Nullable String imagePath;
 
     public QuadShape(Element gameObject, double width, double height) {
         final Position positionNode = (Position) gameObject.findCharacteristic(Position.class);
@@ -24,6 +25,38 @@ public class QuadShape extends Shape {
         this.height = height;
     }
 
+    public void setBorderColor(Color color) {
+        this.borderColor = color;
+    }
+
+    public void setBackgroundColor(Color color) {
+        this.backgroundColor = color;
+    }
+
+    public void setImage(String path) {
+        this.imagePath = path;
+    }
+
+    public Color getBorderColor() {
+        return borderColor;
+    }
+
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void updateWidth(double width) {
+        this.width = width;
+    }
+
+    public void updateHeight(double height) {
+        this.height = height;
+    }
+
     public double getWidth() {
         return width;
     }
@@ -32,41 +65,31 @@ public class QuadShape extends Shape {
         return height;
     }
 
-    public double getWidth_Px() {
-        return width * metric.getxUnitPixels();
+    public double getPointX() {
+        return positionNode.getPosX() - (width / 2);
     }
 
-    public double getHeight_Px() {
-        return height * metric.getyUnitPixels();
+    public double getPointY() {
+        return positionNode.getPosY() - (height / 2);
     }
 
-    public double getPosX_Px() {
-        return positionNode.posX * metric.getxUnitPixels();
-    }
-
-    public double getPosY_Px() {
-        return positionNode.posY * metric.getyUnitPixels();
-    }
-
-    public double getPointX_Px() {
-        return camera.getPxRelPosX(positionNode.posX) - (getWidth_Px() / 2);
-    }
-
-    public double getPointY_Px() {
-        return camera.getPxRelPosY(positionNode.posY) - (getHeight_Px() / 2);
-    }
-
+    @Override
     public void draw(Graphics g) {
+        final CameraRule cameraRule = CameraRule.getInstance();
+        final int relPointX = (int) cameraRule.getDistFromFocus_X(getPointX());
+        final int relPointY = (int) cameraRule.getDistFromFocus_Y(getPointY());
+        final int relWidth = (int) getWidth();
+        final int relHeight = (int) getHeight();
+
         if (borderColor != null) {
             g.setColor(borderColor);
-            g.drawRect((int) getPointX_Px(), (int) getPointY_Px(), (int) getWidth_Px(),
-                    (int) getHeight_Px());
+            g.drawRect(relPointX, relPointY, relWidth, relHeight);
         }
 
         if (backgroundColor != null) {
             g.setColor(backgroundColor);
-            g.fillRect((int) getPointX_Px(), (int) getPointY_Px(), (int) getWidth_Px(),
-                    (int) getHeight_Px());
+            g.fillRect(relPointX, relPointY, relWidth, relHeight);
+
         }
     }
 }

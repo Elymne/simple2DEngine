@@ -3,7 +3,6 @@ package org.engine.presentation.elements;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.annotation.Nullable;
-
 import org.engine.core.characteristics.Physics;
 import org.engine.core.characteristics.Position;
 import org.engine.core.characteristics.QuadShape;
@@ -15,19 +14,19 @@ public class StaticBlock extends Element {
     }
 
     static public StaticBlock build(double posX, double posY, double width, double height, @Nullable String key) {
-        final StaticBlock gameObject = new StaticBlock(key);
+        final StaticBlock element = new StaticBlock(key);
 
-        final Position positionNode = new Position(posX, posY);
-        gameObject.characteristic.add(positionNode);
+        final Position position = new Position(posX, posY);
+        element.characteristic.add(position);
 
-        final QuadShape shapeNode = new QuadShape(gameObject, width, height);
-        shapeNode.backgroundColor = new Color(0x0000ff);
-        gameObject.characteristic.add(shapeNode);
+        final QuadShape shape = new QuadShape(element, width, height);
+        shape.setBackgroundColor(new Color(0x0000ff));
+        element.characteristic.add(shape);
 
-        final Physics simplePhysicsNode = new Physics(gameObject, true);
-        gameObject.characteristic.add(simplePhysicsNode);
+        final Physics physics = new Physics(element, true);
+        element.characteristic.add(physics);
 
-        return gameObject;
+        return element;
     }
 
     @Override

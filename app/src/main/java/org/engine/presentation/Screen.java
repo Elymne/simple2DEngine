@@ -4,33 +4,35 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import org.engine.core.levels.Level;
-import org.engine.core.rules.metric.MetricRule;
 import org.engine.core.rules.time.TimeListener;
 import org.engine.core.rules.time.TimeRule;
+import org.engine.core.rules.viewport.ViewportRule;
 import org.engine.presentation.levels.ExampleLevel;
 
 public class Screen implements TimeListener {
     private final JFrame jFrame = new JFrame("Application");
     private Level currentLevel = null;
 
-    public void startScreen() {
+    public void setupScreen() {
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         final int width = (int) screenSize.getWidth();
         final int height = (int) screenSize.getHeight();
-
         jFrame.getContentPane().setBackground(new Color(0xffffff));
         jFrame.setSize(width, height);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setVisible(true);
 
-        MetricRule.generateByWidth(140);
-        TimeRule.getInstance().changeFpsCap(TimeRule.SIXTY_FPS);
-        TimeRule.getInstance().addNewListener(this);
+        final ViewportRule viewport = ViewportRule.getInstance();
+        viewport.setjFrame(jFrame);
+        viewport.setViewport(0, 0);
+
+        final TimeRule timeRule = TimeRule.getInstance();
+        timeRule.setFrameRate(TimeRule.SIXTY_FPS);
+        timeRule.addNewListener(this);
     }
 
-    public void startLevel() {
+    public void start() {
         try {
             currentLevel = new ExampleLevel();
             jFrame.getContentPane().add(currentLevel);

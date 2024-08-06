@@ -23,7 +23,7 @@ public class TimeRule {
         return instance;
     }
 
-    public void changeFpsCap(int fpsCap) {
+    public void setFrameRate(int fpsCap) {
         this.fpsCap = fpsCap;
     }
 

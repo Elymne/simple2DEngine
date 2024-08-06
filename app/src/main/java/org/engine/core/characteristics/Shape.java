@@ -1,11 +1,25 @@
 package org.engine.core.characteristics;
 
-import org.engine.core.rules.camera.CameraRule;
-import org.engine.core.rules.metric.MetricRule;
+import java.awt.Graphics;
 
 abstract public class Shape extends Characteristic {
-    public Position positionNode;
+    protected Position positionNode;
 
-    protected MetricRule metric = MetricRule.getInstance();
-    protected CameraRule camera = CameraRule.getInstance();
+    public double getPosX() {
+        return positionNode.getPosX();
+    }
+
+    public double getPosY() {
+        return positionNode.getPosY();
+    }
+
+    public void updatePosX(double posX) {
+        positionNode.setPosX(posX);
+    }
+
+    public void updatePosY(double posY) {
+        positionNode.setPosY(posY);
+    }
+
+    abstract public void draw(Graphics g);
 }

@@ -3,12 +3,10 @@ package org.engine.presentation.elements;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.annotation.Nullable;
-
 import org.engine.core.characteristics.Physics;
 import org.engine.core.characteristics.Position;
 import org.engine.core.characteristics.QuadShape;
 import org.engine.core.elements.Element;
-import org.engine.core.rules.camera.CameraRule;
 
 public class Block extends Element {
     protected Block(String key) {
@@ -16,21 +14,19 @@ public class Block extends Element {
     }
 
     static public Block build(double posX, double posY, double width, double height, @Nullable String key) {
-        final Block gameObject = new Block(key);
+        final Block element = new Block(key);
 
         final Position positionNode = new Position(posX, posY);
-        gameObject.characteristic.add(positionNode);
+        element.characteristic.add(positionNode);
 
-        final QuadShape shapeNode = new QuadShape(gameObject, width, height);
-        shapeNode.backgroundColor = new Color(0xff0000);
-        gameObject.characteristic.add(shapeNode);
+        final QuadShape shapeNode = new QuadShape(element, width, height);
+        shapeNode.setBackgroundColor(new Color(0xff0000));
+        element.characteristic.add(shapeNode);
 
-        final Physics physicsNode = new Physics(gameObject, false);
-        gameObject.characteristic.add(physicsNode);
+        final Physics physicsNode = new Physics(element, false);
+        element.characteristic.add(physicsNode);
 
-        CameraRule.getInstance().setFocus(gameObject);
-
-        return gameObject;
+        return element;
     }
 
     @Override

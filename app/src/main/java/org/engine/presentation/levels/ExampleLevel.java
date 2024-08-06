@@ -7,15 +7,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.engine.core.elements.Element;
 import org.engine.core.levels.Level;
+import org.engine.core.rules.camera.CameraRule;
 import org.engine.presentation.elements.Block;
 import org.engine.presentation.elements.StaticBlock;
 
 public class ExampleLevel extends Level {
     public ExampleLevel() {
         name = "Example level";
+        final Block block = Block.build(0, 200, 40, 40, "Movable block");
+        final StaticBlock floor = StaticBlock.build(0, 0, 1000, 40, "Floor");
+        CameraRule.getInstance().setFocus(floor);
+
         elements = new ArrayList<Element>(Arrays.asList(new Element[] {
-                StaticBlock.build(0, 0, 100, 4, null),
-                Block.build(0, 60, 3, 10, null),
+                floor, block
         }));
 
     }
