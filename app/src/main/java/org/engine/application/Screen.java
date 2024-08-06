@@ -16,9 +16,9 @@ public class Screen implements TimeListener {
     private Level currentLevel = null;
 
     public void startScreen() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) screenSize.getWidth();
-        int height = (int) screenSize.getHeight();
+        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        final int width = (int) screenSize.getWidth();
+        final int height = (int) screenSize.getHeight();
 
         jFrame.getContentPane().setBackground(new Color(0xffffff));
         jFrame.setSize(width, height);
@@ -50,6 +50,7 @@ public class Screen implements TimeListener {
 
     @Override
     public void onNextFrame(int time) {
+        System.out.println(Toolkit.getDefaultToolkit().getScreenSize().width);
         if (currentLevel != null) {
             currentLevel.repaint();
             currentLevel.revalidate();
