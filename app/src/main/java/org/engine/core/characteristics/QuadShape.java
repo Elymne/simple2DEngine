@@ -24,31 +24,49 @@ public class QuadShape extends Shape {
         this.height = height;
     }
 
-    private double getWidthPixels() {
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth_Px() {
         return width * metric.getxUnitPixels();
     }
 
-    private double getHeightPixels() {
+    public double getHeight_Px() {
         return height * metric.getyUnitPixels();
     }
 
-    private double getPosXPixels() {
-        return camera.getPxRelPosX(positionNode.posX) - (getWidthPixels() / 2);
+    public double getPosX_Px() {
+        return positionNode.posX * metric.getxUnitPixels();
     }
 
-    private double getPosYPixels() {
-        return camera.getPxRelPosY(positionNode.posY) - (getHeightPixels() / 2);
+    public double getPosY_Px() {
+        return positionNode.posY * metric.getyUnitPixels();
+    }
+
+    public double getPointX_Px() {
+        return camera.getPxRelPosX(positionNode.posX) - (getWidth_Px() / 2);
+    }
+
+    public double getPointY_Px() {
+        return camera.getPxRelPosY(positionNode.posY) - (getHeight_Px() / 2);
     }
 
     public void draw(Graphics g) {
         if (borderColor != null) {
             g.setColor(borderColor);
-            g.drawRect((int) getPosXPixels(), (int) getPosYPixels(), (int) getWidthPixels(), (int) getHeightPixels());
+            g.drawRect((int) getPointX_Px(), (int) getPointY_Px(), (int) getWidth_Px(),
+                    (int) getHeight_Px());
         }
 
         if (backgroundColor != null) {
             g.setColor(backgroundColor);
-            g.fillRect((int) getPosXPixels(), (int) getPosYPixels(), (int) getWidthPixels(), (int) getHeightPixels());
+            g.fillRect((int) getPointX_Px(), (int) getPointY_Px(), (int) getWidth_Px(),
+                    (int) getHeight_Px());
         }
     }
 }

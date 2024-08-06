@@ -59,10 +59,10 @@ public class SimplePhysics implements TimeListener {
             return false;
         }
 
-        if (shape1.positionNode.posX + shape1.width >= shape2.positionNode.posX &&
-                shape1.positionNode.posX <= shape2.positionNode.posX + shape2.width &&
-                shape1.positionNode.posY + shape1.height >= shape2.positionNode.posY &&
-                shape1.positionNode.posY <= shape2.positionNode.posY + shape2.height) {
+        if (shape1.getPointX_Px() + shape1.getWidth_Px() >= shape2.getPointX_Px() &&
+                shape1.getPointX_Px() <= shape2.getPointX_Px() + shape2.getWidth_Px() &&
+                shape1.getPointY_Px() + shape1.getHeight_Px() >= shape2.getPointY_Px() &&
+                shape1.getPointY_Px() <= shape2.getPointY_Px() + shape2.getHeight_Px()) {
             return true;
         }
 

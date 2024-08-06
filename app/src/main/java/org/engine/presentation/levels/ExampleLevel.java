@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import org.engine.core.elements.Element;
 import org.engine.core.levels.Level;
 import org.engine.presentation.elements.Block;
@@ -15,8 +14,8 @@ public class ExampleLevel extends Level {
     public ExampleLevel() {
         name = "Example level";
         elements = new ArrayList<Element>(Arrays.asList(new Element[] {
-                Block.build(0, 60, 3, 3, null),
                 StaticBlock.build(0, 0, 100, 4, null),
+                Block.build(0, 60, 3, 10, null),
         }));
 
     }

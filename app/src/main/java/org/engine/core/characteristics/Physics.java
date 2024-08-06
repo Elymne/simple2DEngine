@@ -53,10 +53,12 @@ public class Physics extends Characteristic implements PhysicsListener {
             return;
         }
 
-        final QuadShape firstShape = (QuadShape) buffer.getFirst().findCharacteristic(QuadShape.class);
-        if (firstShape != null && shape.positionNode.posY + shape.height <= firstShape.positionNode.posY) {
-            shape.positionNode.posY = firstShape.positionNode.posY + shape.height;
-        }
+        // final QuadShape firstShape = (QuadShape)
+        // buffer.getFirst().findCharacteristic(QuadShape.class);
+        // if (firstShape != null && shape.getPointY_Px() + shape.getHeight_Px() >=
+        // firstShape.getPointY_Px()) {
+        // shape.positionNode.posY = firstShape.positionNode.posY + shape.height / 2;
+        // }
 
         velocityY = 0;
     }
