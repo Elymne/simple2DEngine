@@ -8,7 +8,7 @@ import org.engine.core.rules.physics.SimplePhysicsRule;
 
 public class Physics extends Characteristic implements PhysicsListener {
     private QuadShape shape;
-    private double fallingSpeed = 0.4;
+    private double fallingSpeed = 1;
     private boolean isStatic;
 
     public Physics(Element gameObject, boolean isStatic) {
