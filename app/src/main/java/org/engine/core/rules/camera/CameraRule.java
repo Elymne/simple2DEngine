@@ -22,7 +22,8 @@ public class CameraRule {
             System.err.println(CustomErrors.NO_POSITION_FOUND);
             return;
         }
-        this.focus = positionNode;
+        focus = positionNode;
+        System.out.println("test");
     }
 
     public double getDistFromFocus_X(double posX) {
