@@ -1,4 +1,4 @@
-package org.engine.application.rules.metric;
+package org.engine.core.rules.metric;
 
 import java.awt.Toolkit;
 

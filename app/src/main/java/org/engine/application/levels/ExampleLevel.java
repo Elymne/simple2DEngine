@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import org.engine.application.elements.Block;
 import org.engine.application.elements.StaticBlock;
-import org.engine.core.Element;
-import org.engine.core.Level;
+import org.engine.core.elements.Element;
+import org.engine.core.levels.Level;
 
 public class ExampleLevel extends Level {
     public ExampleLevel() {

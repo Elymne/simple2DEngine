@@ -3,23 +3,21 @@ package org.engine.application.characteristics;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.annotation.Nullable;
-
-import org.engine.application.rules.camera.CameraRule;
-import org.engine.application.rules.metric.MetricRule;
 import org.engine.constants.CustomErrors;
-import org.engine.core.Characteristic;
-import org.engine.core.Element;
+import org.engine.core.characteristics.Shape;
+import org.engine.core.elements.Element;
+import org.engine.core.rules.camera.CameraRule;
+import org.engine.core.rules.metric.MetricRule;
 
-public class QuadShapeNode extends Characteristic {
-    public PositionNode positionNode;
+public class QuadShape extends Shape {
     public double width;
     public double height;
     public @Nullable Color backgroundColor;
     public @Nullable Color borderColor;
     public @Nullable String imagePath;
 
-    public QuadShapeNode(Element gameObject, double width, double height) {
-        final PositionNode positionNode = (PositionNode) gameObject.findNode(PositionNode.class);
+    public QuadShape(Element gameObject, double width, double height) {
+        final Position positionNode = (Position) gameObject.findCharacteristic(Position.class);
         if (positionNode == null) {
             System.err.println(CustomErrors.NO_POSITION_FOUND);
             return;

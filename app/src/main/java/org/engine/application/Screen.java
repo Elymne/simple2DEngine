@@ -6,10 +6,10 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import org.engine.application.levels.tools.LevelEnum;
 import org.engine.application.levels.tools.LevelSelector;
-import org.engine.application.rules.time.TimeRule;
-import org.engine.core.Level;
-import org.engine.application.rules.metric.MetricRule;
-import org.engine.application.rules.time.TimeListener;
+import org.engine.core.levels.Level;
+import org.engine.core.rules.metric.MetricRule;
+import org.engine.core.rules.time.TimeListener;
+import org.engine.core.rules.time.TimeRule;
 
 public class Screen implements TimeListener {
     private final JFrame jFrame = new JFrame("Application");

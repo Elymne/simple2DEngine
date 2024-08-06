@@ -1,29 +1,29 @@
-package org.engine.application.rules.camera;
+package org.engine.core.rules.camera;
 
-import org.engine.application.characteristics.PositionNode;
-import org.engine.application.rules.metric.MetricRule;
+import org.engine.application.characteristics.Position;
 import org.engine.constants.CustomErrors;
-import org.engine.core.Element;
+import org.engine.core.elements.Element;
+import org.engine.core.rules.metric.MetricRule;
 
 import java.awt.Toolkit;
 
 public class CameraRule {
-    private PositionNode focus;
+    private Position focus;
     private static CameraRule instance;
 
-    private CameraRule(PositionNode positionNode) {
+    private CameraRule(Position positionNode) {
         focus = positionNode;
     }
 
     public static CameraRule getInstance() {
         if (instance == null) {
-            instance = new CameraRule(new PositionNode(0, 0));
+            instance = new CameraRule(new Position(0, 0));
         }
         return instance;
     }
 
     public void setFocus(Element gameObject) {
-        final PositionNode positionNode = (PositionNode) gameObject.findNode(PositionNode.class);
+        final Position positionNode = (Position) gameObject.findCharacteristic(Position.class);
         if (positionNode == null) {
             System.err.println(CustomErrors.NO_POSITION_FOUND);
             return;

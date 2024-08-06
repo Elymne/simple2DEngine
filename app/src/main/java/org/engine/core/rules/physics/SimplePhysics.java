@@ -1,11 +1,11 @@
-package org.engine.application.rules.physics;
+package org.engine.core.rules.physics;
 
 import java.util.ArrayList;
-import org.engine.application.characteristics.PhysicsNode;
-import org.engine.application.characteristics.QuadShapeNode;
-import org.engine.application.rules.time.TimeRule;
-import org.engine.core.Element;
-import org.engine.application.rules.time.TimeListener;
+import org.engine.application.characteristics.Physics;
+import org.engine.application.characteristics.QuadShape;
+import org.engine.core.elements.Element;
+import org.engine.core.rules.time.TimeListener;
+import org.engine.core.rules.time.TimeRule;
 
 public class SimplePhysics implements TimeListener {
     private static SimplePhysics instance;
@@ -25,7 +25,7 @@ public class SimplePhysics implements TimeListener {
     @Override
     public void onNextFrame(int timeDelta) {
         for (Element g1 : gameObjects) {
-            final PhysicsNode physicsNode = (PhysicsNode) g1.findNode(PhysicsNode.class);
+            final Physics physicsNode = (Physics) g1.findCharacteristic(Physics.class);
             if (physicsNode != null && physicsNode.isStatic == false) {
                 final ArrayList<Element> bufferCollision = new ArrayList<Element>();
                 for (Element g2 : gameObjects) {
@@ -51,8 +51,8 @@ public class SimplePhysics implements TimeListener {
             return false;
         }
 
-        final QuadShapeNode shape1 = (QuadShapeNode) g1.findNode(QuadShapeNode.class);
-        final QuadShapeNode shape2 = (QuadShapeNode) g2.findNode(QuadShapeNode.class);
+        final QuadShape shape1 = (QuadShape) g1.findCharacteristic(QuadShape.class);
+        final QuadShape shape2 = (QuadShape) g2.findCharacteristic(QuadShape.class);
 
         if (shape1 == null || shape2 == null) {
             return false;
