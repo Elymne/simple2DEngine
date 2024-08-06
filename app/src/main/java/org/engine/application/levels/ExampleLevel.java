@@ -12,17 +12,19 @@ import org.engine.core.levels.Level;
 
 public class ExampleLevel extends Level {
     public ExampleLevel() {
-        super(new ArrayList<Element>(Arrays.asList(new Element[] {
+        name = "Example level";
+        elements = new ArrayList<Element>(Arrays.asList(new Element[] {
                 Block.build(50, 60, 3, 3, null),
                 StaticBlock.build(0, 0, 100, 4, null),
-        })));
+        }));
+
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Element gameObject : gameObjects) {
-            gameObject.paint(g);
+        for (Element element : elements) {
+            element.paint(g);
         }
     }
 

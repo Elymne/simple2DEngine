@@ -4,8 +4,7 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import org.engine.application.levels.tools.LevelEnum;
-import org.engine.application.levels.tools.LevelSelector;
+import org.engine.application.levels.ExampleLevel;
 import org.engine.core.levels.Level;
 import org.engine.core.rules.metric.MetricRule;
 import org.engine.core.rules.time.TimeListener;
@@ -30,9 +29,9 @@ public class Screen implements TimeListener {
         TimeRule.getInstance().addNewListener(this);
     }
 
-    public void setLevel(LevelEnum level) {
+    public void startLevel() {
         try {
-            currentLevel = LevelSelector.generateLevelFromIndex(level);
+            currentLevel = new ExampleLevel();
             jFrame.getContentPane().add(currentLevel);
             TimeRule.getInstance().run();
         } catch (Exception e) {
