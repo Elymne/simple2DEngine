@@ -40,19 +40,19 @@ public class ViewportRule {
         return height;
     }
 
-    public int getWidthScaleFactor() {
-        return width / jFrame.getBounds().width;
+    public double getWidthScaleFactor() {
+        return (double) jFrame.getBounds().width / width;
     }
 
-    public int getHeigthScaleFactor() {
-        return height / jFrame.getBounds().height;
+    public double getHeigthScaleFactor() {
+        return (double) jFrame.getBounds().height / height;
     }
 
-    public int getTransformedWidth(double width) {
-        return (int) (getWidthScaleFactor() * width);
+    public double getTransformedWidth(double width) {
+        return (getWidthScaleFactor() * width);
     }
 
-    public int getTransformedHeight(double height) {
+    public double getTransformedHeight(double height) {
         return (int) (getHeigthScaleFactor() * height);
     }
 }

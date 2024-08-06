@@ -2,7 +2,10 @@ package org.engine.core.characteristics;
 
 import java.awt.Graphics;
 
+import org.engine.core.rules.viewport.ViewportRule;
+
 abstract public class Shape extends Characteristic {
+    protected ViewportRule viewportRule = ViewportRule.getInstance();
     protected Position positionNode;
 
     public double getPosX() {

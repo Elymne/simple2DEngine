@@ -76,10 +76,11 @@ public class QuadShape extends Shape {
     @Override
     public void draw(Graphics g) {
         final CameraRule cameraRule = CameraRule.getInstance();
-        final int relPointX = (int) cameraRule.getDistFromFocus_X(getPointX());
-        final int relPointY = (int) cameraRule.getDistFromFocus_Y(getPointY());
-        final int relWidth = (int) getWidth();
-        final int relHeight = (int) getHeight();
+
+        final int relPointX = (int) cameraRule.getDistFromFocus_X(viewportRule.getTransformedWidth(getPointX()));
+        final int relPointY = (int) cameraRule.getDistFromFocus_Y(viewportRule.getTransformedHeight(getPointY()));
+        final int relWidth = (int) viewportRule.getTransformedWidth(getWidth());
+        final int relHeight = (int) viewportRule.getTransformedHeight(getHeight());
 
         if (borderColor != null) {
             g.setColor(borderColor);

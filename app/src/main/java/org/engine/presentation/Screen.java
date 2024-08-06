@@ -25,7 +25,7 @@ public class Screen implements TimeListener {
 
         final ViewportRule viewport = ViewportRule.getInstance();
         viewport.setjFrame(jFrame);
-        viewport.setViewport(0, 0);
+        viewport.setViewport(1080, 720);
 
         final TimeRule timeRule = TimeRule.getInstance();
         timeRule.setFrameRate(TimeRule.SIXTY_FPS);
