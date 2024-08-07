@@ -1,5 +1,6 @@
 package org.engine.presentation.levels;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -14,15 +15,14 @@ import org.engine.presentation.elements.StaticBlock;
 public class ExampleLevel extends Level {
     public ExampleLevel() {
         name = "Example level";
+        setBackground(new Color(0xffffff));
+
         final Block block = Block.build(0, 800, 40, 40, "Movable block");
         final StaticBlock floor = StaticBlock.build(0, 0, 1000, 40, "Floor");
-
         CameraRule.getInstance().setFocus(block);
-
         elements = new ArrayList<Element>(Arrays.asList(new Element[] {
                 floor, block
         }));
-
     }
 
     @Override
@@ -40,4 +40,5 @@ public class ExampleLevel extends Level {
         int height = (int) screenSize.getHeight();
         return new Dimension(width, height);
     }
+
 }

@@ -28,11 +28,11 @@ public class CameraRule {
 
     public double getDistFromFocus_X(double posX) {
         final ViewportRule viewPort = ViewportRule.getInstance();
-        return (viewPort.getScreenWidth() / 2) + (posX - focus.getPosX());
+        return (viewPort.getFrameWidth() / 2) + (posX - focus.getPosX());
     }
 
     public double getDistFromFocus_Y(double posY) {
         final ViewportRule viewPort = ViewportRule.getInstance();
-        return (viewPort.getScreenHeight() / 2) + (-posY + focus.getPosY());
+        return (viewPort.getFrameHeight() / 2) + (-posY + focus.getPosY());
     }
 }

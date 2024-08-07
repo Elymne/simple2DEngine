@@ -1,9 +1,5 @@
 package org.engine.presentation;
 
-import javax.swing.JFrame;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import org.engine.core.levels.Level;
 import org.engine.core.rules.time.TimeListener;
 import org.engine.core.rules.time.TimeRule;
@@ -11,21 +7,14 @@ import org.engine.core.rules.viewport.ViewportRule;
 import org.engine.presentation.levels.ExampleLevel;
 
 public class Screen implements TimeListener {
-    private final JFrame jFrame = new JFrame("Application");
     private Level currentLevel = null;
 
     public void setupScreen() {
-        final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        final int width = (int) screenSize.getWidth();
-        final int height = (int) screenSize.getHeight();
-        jFrame.getContentPane().setBackground(new Color(0xffffff));
-        jFrame.setSize(width, height);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setVisible(true);
-
-        final ViewportRule viewport = ViewportRule.getInstance();
-        viewport.setjFrame(jFrame);
-        viewport.setViewport(1080, 720);
+        final ViewportRule viewportRule = ViewportRule.getInstance();
+        viewportRule.setTitle("Game Engine");
+        viewportRule.setViewport(1080, 720);
+        viewportRule.setScreenMode(ViewportRule.WINDOWED_MODE);
+        viewportRule.start();
 
         final TimeRule timeRule = TimeRule.getInstance();
         timeRule.setFrameRate(TimeRule.SIXTY_FPS);
@@ -34,8 +23,9 @@ public class Screen implements TimeListener {
 
     public void start() {
         try {
+            final ViewportRule viewport = ViewportRule.getInstance();
             currentLevel = new ExampleLevel();
-            jFrame.getContentPane().add(currentLevel);
+            viewport.renderLevel(currentLevel);
             TimeRule.getInstance().run();
         } catch (Exception e) {
             currentLevel = null;
@@ -45,7 +35,8 @@ public class Screen implements TimeListener {
     }
 
     public void clearLevel() {
-        jFrame.getContentPane().remove(currentLevel);
+        final ViewportRule viewport = ViewportRule.getInstance();
+        viewport.clearLevel(currentLevel);
         currentLevel = null;
         TimeRule.getInstance().pause();
     }
