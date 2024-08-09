@@ -83,6 +83,6 @@ public class ViewportRuler {
     }
 
     public double getScaleFactor() {
-        return 1;
+        return frame.getHeight() / height;
     }
 }

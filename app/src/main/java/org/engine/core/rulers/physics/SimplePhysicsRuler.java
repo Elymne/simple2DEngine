@@ -59,10 +59,10 @@ public class SimplePhysicsRuler implements TimeListener {
             return false;
         }
 
-        final boolean f = shape_1.getPointX() < shape_2.getPointX() + shape_2.getWidth() &&
-                shape_1.getPointX() + shape_1.getWidth() > shape_2.getPointX() &&
-                shape_1.getPointY() > shape_2.getPointY() - shape_2.getHeight() &&
-                shape_1.getPointY() - shape_1.getHeight() < shape_2.getPointY();
+        final boolean f = shape_1.getPointX() <= shape_2.getPointX() + shape_2.getWidth() &&
+                shape_1.getPointX() + shape_1.getWidth() >= shape_2.getPointX() &&
+                shape_1.getPointY() >= shape_2.getPointY() - shape_2.getHeight() &&
+                shape_1.getPointY() - shape_1.getHeight() <= shape_2.getPointY();
         if (f) {
             return true;
         }

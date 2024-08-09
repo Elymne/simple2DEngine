@@ -11,10 +11,11 @@ import org.engine.presentation.elements.StaticBlock;
 public class ExampleLevel extends Scene {
     public ExampleLevel() {
         name = "Example level";
+
         final StaticBlock floor = StaticBlock.build(0, 0, 1000, 50, "Floor");
         final Block block = Block.build(0, 600, 100, 100, "Movable block");
 
-        CameraRuler.getInstance().setFocus(floor);
+        CameraRuler.getInstance().setFocus(block);
 
         elements.addAll(new ArrayList<Element>(Arrays.asList(new Element[] {
                 floor, block
