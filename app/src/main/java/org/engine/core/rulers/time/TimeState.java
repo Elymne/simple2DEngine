@@ -1,4 +1,4 @@
-package org.engine.core.rules.time;
+package org.engine.core.rulers.time;
 
 public enum TimeState {
     UNDEFINED, WAITING, RUNNING

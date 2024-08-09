@@ -3,8 +3,8 @@ package org.engine.core.characteristics;
 import java.util.ArrayList;
 import org.engine.core.constants.CustomErrors;
 import org.engine.core.elements.Element;
-import org.engine.core.rules.physics.PhysicsListener;
-import org.engine.core.rules.physics.SimplePhysicsRule;
+import org.engine.core.rulers.physics.PhysicsListener;
+import org.engine.core.rulers.physics.SimplePhysicsRuler;
 
 public class Physics extends Characteristic implements PhysicsListener {
     private QuadShape shape;
@@ -19,7 +19,7 @@ public class Physics extends Characteristic implements PhysicsListener {
         }
         this.shape = shape;
         this.isStatic = isStatic;
-        SimplePhysicsRule.getInstance().addElement(gameObject);
+        SimplePhysicsRuler.getInstance().addElement(gameObject);
     }
 
     public boolean isStatic() {

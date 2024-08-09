@@ -2,7 +2,7 @@ package org.engine.core.characteristics;
 
 import java.awt.Graphics;
 
-import org.engine.core.rules.viewport.ViewportRuler;
+import org.engine.core.rulers.viewport.ViewportRuler;
 
 abstract public class Shape extends Characteristic {
     protected ViewportRuler viewportRule = ViewportRuler.getInstance();

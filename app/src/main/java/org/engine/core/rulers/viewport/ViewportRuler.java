@@ -1,10 +1,10 @@
-package org.engine.core.rules.viewport;
+package org.engine.core.rulers.viewport;
 
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.engine.core.rules.scene.SceneRuler;
+import org.engine.core.rulers.scene.SceneRuler;
 
 public class ViewportRuler {
     private static ViewportRuler instance;

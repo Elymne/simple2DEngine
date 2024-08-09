@@ -1,4 +1,4 @@
-package org.engine.core.rules.scene;
+package org.engine.core.rulers.scene;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
