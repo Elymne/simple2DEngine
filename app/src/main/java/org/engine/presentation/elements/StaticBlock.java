@@ -33,7 +33,7 @@ public class StaticBlock extends Element {
     public void paint(Graphics g) {
         final QuadShape quadShapeNode = (QuadShape) findCharacteristic(QuadShape.class);
         if (quadShapeNode != null) {
-            quadShapeNode.draw(g);
+            quadShapeNode.drawFrame(g);
         }
     }
 

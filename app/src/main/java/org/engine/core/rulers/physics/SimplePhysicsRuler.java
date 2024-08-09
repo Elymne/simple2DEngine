@@ -1,23 +1,24 @@
-package org.engine.core.rules.physics;
+package org.engine.core.rulers.physics;
 
 import java.util.ArrayList;
 import org.engine.core.characteristics.Physics;
 import org.engine.core.characteristics.QuadShape;
 import org.engine.core.elements.Element;
-import org.engine.core.rules.time.TimeListener;
-import org.engine.core.rules.time.TimeRule;
+import org.engine.core.rulers.time.TimeListener;
+import org.engine.core.rulers.time.TimeRuler;
 
-public class SimplePhysicsRule implements TimeListener {
-    private static SimplePhysicsRule instance;
+public class SimplePhysicsRuler implements TimeListener {
+    private static SimplePhysicsRuler instance;
+
     private final ArrayList<Element> elements = new ArrayList<Element>();
 
-    private SimplePhysicsRule() {
-        TimeRule.getInstance().addNewListener(this);
+    private SimplePhysicsRuler() {
+        TimeRuler.getInstance().addNewListener(this);
     }
 
-    public static SimplePhysicsRule getInstance() {
+    public static SimplePhysicsRuler getInstance() {
         if (instance == null) {
-            instance = new SimplePhysicsRule();
+            instance = new SimplePhysicsRuler();
         }
         return instance;
     }
@@ -58,10 +59,11 @@ public class SimplePhysicsRule implements TimeListener {
             return false;
         }
 
-        if (shape_1.getPointX() + shape_1.getWidth() >= shape_2.getPointX() &&
-                shape_1.getPointX() <= shape_2.getPointX() + shape_2.getWidth() &&
-                shape_1.getPointY() + shape_1.getHeight() >= shape_2.getPointY() &&
-                shape_1.getPointY() <= shape_2.getPointY() + shape_2.getHeight()) {
+        final boolean f = shape_1.getPointX() < shape_2.getPointX() + shape_2.getWidth() &&
+                shape_1.getPointX() + shape_1.getWidth() > shape_2.getPointX() &&
+                shape_1.getPointY() > shape_2.getPointY() - shape_2.getHeight() &&
+                shape_1.getPointY() - shape_1.getHeight() < shape_2.getPointY();
+        if (f) {
             return true;
         }
 

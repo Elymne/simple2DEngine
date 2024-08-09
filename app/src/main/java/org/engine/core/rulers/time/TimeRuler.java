@@ -1,24 +1,24 @@
-package org.engine.core.rules.time;
+package org.engine.core.rulers.time;
 
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimeRule {
+public class TimeRuler {
     private Timer currentTimer = new Timer();
     private TimeState state = TimeState.UNDEFINED;
-    private int fpsCap = TimeRule.SIXTY_FPS;
+    private int fpsCap = TimeRuler.SIXTY_FPS;
     private final ArrayList<TimeListener> physicsListeners = new ArrayList<TimeListener>();
 
     public static final int SIXTY_FPS = 16;
     public static final int THIRTY_FPS = 33;
     public static final int NO_CAP = -1;
 
-    private static TimeRule instance;
+    private static TimeRuler instance;
 
-    public static TimeRule getInstance() {
+    public static TimeRuler getInstance() {
         if (instance == null) {
-            instance = new TimeRule();
+            instance = new TimeRuler();
         }
         return instance;
     }
@@ -35,7 +35,7 @@ public class TimeRule {
 
         state = TimeState.RUNNING;
 
-        if (fpsCap == TimeRule.NO_CAP) {
+        if (fpsCap == TimeRuler.NO_CAP) {
             // create a thread with infinite loop.
             return;
         }
@@ -54,7 +54,7 @@ public class TimeRule {
             return;
         }
 
-        if (fpsCap == TimeRule.NO_CAP) {
+        if (fpsCap == TimeRuler.NO_CAP) {
             // create a thread with infinite loop.
             return;
         }

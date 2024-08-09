@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import javax.annotation.Nullable;
 import org.engine.core.constants.CustomErrors;
 import org.engine.core.elements.Element;
-import org.engine.core.rules.camera.CameraRule;
+import org.engine.core.rulers.camera.CameraRuler;
 
 public class QuadShape extends Shape {
     private double width;
@@ -74,10 +74,11 @@ public class QuadShape extends Shape {
     }
 
     @Override
-    public void draw(Graphics g) {
-        final CameraRule cameraRule = CameraRule.getInstance();
-        final int relPointX = (int) cameraRule.getDistFromFocus_X(getPointX());
-        final int relPointY = (int) cameraRule.getDistFromFocus_Y(getPointY());
+    public void drawFrame(Graphics g) {
+        final CameraRuler cameraRuler = CameraRuler.getInstance();
+
+        final int relPointX = (int) cameraRuler.getDistFromFocus_X(getPointX());
+        final int relPointY = (int) cameraRuler.getDistFromFocus_Y(getPointY());
         final int relWidth = (int) getWidth();
         final int relHeight = (int) getHeight();
 
@@ -89,7 +90,6 @@ public class QuadShape extends Shape {
         if (backgroundColor != null) {
             g.setColor(backgroundColor);
             g.fillRect(relPointX, relPointY, relWidth, relHeight);
-
         }
     }
 }

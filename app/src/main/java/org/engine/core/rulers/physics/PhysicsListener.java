@@ -1,4 +1,4 @@
-package org.engine.core.rules.physics;
+package org.engine.core.rulers.physics;
 
 import java.util.ArrayList;
 import org.engine.core.elements.Element;
