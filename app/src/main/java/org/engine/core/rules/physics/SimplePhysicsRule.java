@@ -9,6 +9,7 @@ import org.engine.core.rules.time.TimeRule;
 
 public class SimplePhysicsRule implements TimeListener {
     private static SimplePhysicsRule instance;
+
     private final ArrayList<Element> elements = new ArrayList<Element>();
 
     private SimplePhysicsRule() {
@@ -58,12 +59,24 @@ public class SimplePhysicsRule implements TimeListener {
             return false;
         }
 
-        if (shape_1.getPointX() + shape_1.getWidth() >= shape_2.getPointX() &&
+        final boolean f = shape_1.getPointX() < shape_2.getPointX() + shape_2.getWidth() &&
+                shape_1.getPointX() + shape_1.getWidth() > shape_2.getPointX() &&
+                shape_1.getPointY() > shape_2.getPointY() - shape_2.getHeight() &&
+                shape_1.getPointY() - shape_1.getHeight() < shape_2.getPointY();
+
+        final boolean ff = shape_1.getPointX() + shape_1.getWidth() >= shape_2.getPointX() &&
                 shape_1.getPointX() <= shape_2.getPointX() + shape_2.getWidth() &&
-                shape_1.getPointY() + shape_1.getHeight() >= shape_2.getPointY() &&
-                shape_1.getPointY() <= shape_2.getPointY() + shape_2.getHeight()) {
+                shape_1.getPointY() - shape_1.getHeight() <= shape_2.getPointY() &&
+                shape_1.getPointY() >= shape_2.getPointY() + shape_2.getHeight();
+
+        if (f) {
             return true;
         }
+
+        // rect1.x < rect2.x + rect2.w &&
+        // rect1.x + rect1.w > rect2.x &&
+        // rect1.y < rect2.y + rect2.h &&
+        // rect1.y + rect1.h > rect2.y
 
         return false;
     }

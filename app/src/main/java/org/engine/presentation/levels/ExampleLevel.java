@@ -1,44 +1,24 @@
 package org.engine.presentation.levels;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.engine.core.elements.Element;
-import org.engine.core.levels.Level;
 import org.engine.core.rules.camera.CameraRule;
+import org.engine.core.scenes.Scene;
 import org.engine.presentation.elements.Block;
 import org.engine.presentation.elements.StaticBlock;
 
-public class ExampleLevel extends Level {
+public class ExampleLevel extends Scene {
     public ExampleLevel() {
         name = "Example level";
-        setBackground(new Color(0xffffff));
+        final StaticBlock floor = StaticBlock.build(0, 0, 1000, 50, "Floor");
+        final Block block = Block.build(0, 600, 100, 100, "Movable block");
 
-        final Block block = Block.build(0, 800, 40, 40, "Movable block");
-        final StaticBlock floor = StaticBlock.build(0, 0, 1000, 40, "Floor");
-        CameraRule.getInstance().setFocus(block);
-        elements = new ArrayList<Element>(Arrays.asList(new Element[] {
+        CameraRule.getInstance().setFocus(floor);
+
+        elements.addAll(new ArrayList<Element>(Arrays.asList(new Element[] {
                 floor, block
-        }));
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        for (Element element : elements) {
-            element.paint(g);
-        }
-    }
-
-    @Override
-    public Dimension getPreferredSize() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) screenSize.getWidth();
-        int height = (int) screenSize.getHeight();
-        return new Dimension(width, height);
+        })));
     }
 
 }

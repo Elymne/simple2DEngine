@@ -3,11 +3,12 @@ package org.engine.core.rules.camera;
 import org.engine.core.characteristics.Position;
 import org.engine.core.constants.CustomErrors;
 import org.engine.core.elements.Element;
-import org.engine.core.rules.viewport.ViewportRule;
+import org.engine.core.rules.viewport.ViewportRuler;
 
 public class CameraRule {
-    private Position focus = new Position(0, 0);
+    private ViewportRuler viewportRuler = ViewportRuler.getInstance();
     private static CameraRule instance;
+    private Position focus = new Position(0, 0);
 
     public static CameraRule getInstance() {
         if (instance == null) {
@@ -16,23 +17,20 @@ public class CameraRule {
         return instance;
     }
 
-    public void setFocus(Element gameObject) {
-        final Position positionNode = (Position) gameObject.findCharacteristic(Position.class);
+    public void setFocus(Element element) {
+        final Position positionNode = (Position) element.findCharacteristic(Position.class);
         if (positionNode == null) {
             System.err.println(CustomErrors.NO_POSITION_FOUND);
             return;
         }
         focus = positionNode;
-        System.out.println("test");
     }
 
     public double getDistFromFocus_X(double posX) {
-        final ViewportRule viewPort = ViewportRule.getInstance();
-        return (viewPort.getFrameWidth() / 2) + (posX - focus.getPosX());
+        return (viewportRuler.getFrameWidth() / 2) + (posX - focus.getPosX());
     }
 
     public double getDistFromFocus_Y(double posY) {
-        final ViewportRule viewPort = ViewportRule.getInstance();
-        return (viewPort.getFrameHeight() / 2) + (-posY + focus.getPosY());
+        return (viewportRuler.getFrameHeight() / 2) + (-posY + focus.getPosY());
     }
 }
