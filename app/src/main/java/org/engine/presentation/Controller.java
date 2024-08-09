@@ -12,9 +12,10 @@ public class Controller implements TimeListener {
     private final SceneRuler sceneRuler = SceneRuler.getInstance();
 
     public void setupScreen() {
+        viewportRuler.initialiseViewPort();
         viewportRuler.setTitle("Game Engine");
         viewportRuler.setViewport(1080, 720);
-        viewportRuler.setScreenMode(ViewportRuler.WINDOWED_MODE);
+        viewportRuler.setScreenMode(ViewportRuler.BORDERLESS_FULLSCREEN_MODE);
         viewportRuler.start();
 
         timeRuler.setFrameRate(TimeRuler.SIXTY_FPS);

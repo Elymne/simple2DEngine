@@ -1,9 +1,6 @@
 package org.engine.core.rulers.scene;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Toolkit;
-
 import javax.annotation.Nullable;
 import javax.swing.JPanel;
 import org.engine.core.elements.Element;
@@ -45,13 +42,5 @@ public class SceneRuler extends JPanel {
         for (Element element : currentScene.getElements()) {
             element.paint(g);
         }
-    }
-
-    @Override
-    public Dimension getPreferredSize() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) screenSize.getWidth();
-        int height = (int) screenSize.getHeight();
-        return new Dimension(width, height);
     }
 }
