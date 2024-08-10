@@ -1,9 +1,6 @@
 package org.engine.rework.rulers.collision;
 
 import java.util.ArrayList;
-import org.engine.core.characteristics.Physics;
-import org.engine.core.characteristics.QuadShape;
-import org.engine.core.elements.Element;
 import org.engine.core.rulers.time.TimeListener;
 import org.engine.core.rulers.time.TimeRuler;
 import org.engine.rework.elements.CollisionShape;
