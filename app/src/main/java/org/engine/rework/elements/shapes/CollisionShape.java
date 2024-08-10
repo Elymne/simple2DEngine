@@ -1,16 +1,20 @@
-package org.engine.rework.elements;
+package org.engine.rework.elements.shapes;
 
 import java.util.ArrayList;
-
+import org.engine.rework.elements.Element;
 import org.engine.rework.rulers.collision.CollisionListener;
+import org.engine.rework.rulers.collision.CollisionRuler;
 
 abstract public class CollisionShape extends Shape implements CollisionListener {
+    protected int collisionFlag;
+
     public CollisionShape(String name,
             double posX, double posY,
             double width, double height,
             int zIndex,
             ArrayList<Element> elements) {
         super(name, posX, posY, width, height, zIndex, elements);
+        CollisionRuler.getInstance().addElement(this);
     }
 
     public CollisionShape(double posX, double posY,
@@ -18,6 +22,14 @@ abstract public class CollisionShape extends Shape implements CollisionListener 
             int zIndex,
             ArrayList<Element> elements) {
         super(posX, posY, width, height, zIndex, elements);
+    }
+
+    public int getCollisionFlag() {
+        return collisionFlag;
+    }
+
+    public void setCollisionFlag(int collisionFlag) {
+        this.collisionFlag = collisionFlag;
     }
 
     public boolean isCollidingWith(CollisionShape element) {

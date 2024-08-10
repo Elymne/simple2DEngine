@@ -1,9 +1,12 @@
-package org.engine.rework.elements;
+package org.engine.rework.elements.shapes;
 
 import java.util.ArrayList;
+import org.engine.rework.elements.Element;
 
-abstract public class AreaShape extends CollisionShape {
-    public AreaShape(String name,
+abstract public class StaticShape extends CollisionShape {
+    private final ArrayList<CollisionShape> collisionShapeContacts = new ArrayList<CollisionShape>();
+
+    public StaticShape(String name,
             double posX, double posY,
             double width, double height,
             int zIndex,
@@ -11,19 +14,14 @@ abstract public class AreaShape extends CollisionShape {
         super(name, posX, posY, width, height, zIndex, elements);
     }
 
-    public AreaShape(double posX, double posY,
+    public StaticShape(double posX, double posY,
             double width, double height,
             int zIndex,
             ArrayList<Element> elements) {
         super(posX, posY, width, height, zIndex, elements);
     }
 
-    abstract public void onCollision(CollisionShape collisionShape);
-
     @Override
-    public void listenCollision(ArrayList<CollisionShape> buffer, int timeDefinallta) {
-        for (int i = 0; i < buffer.size(); i++) {
-            this.onCollision(buffer.get(i));
-        }
+    public void listenCollision(ArrayList<CollisionShape> buffer, int delta) {
     }
 }

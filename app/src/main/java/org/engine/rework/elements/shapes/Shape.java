@@ -1,10 +1,11 @@
-package org.engine.rework.elements;
+package org.engine.rework.elements.shapes;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.annotation.Nullable;
+import org.engine.rework.elements.Element;
 
 public abstract class Shape extends Element {
     protected double posX;
