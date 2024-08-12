@@ -38,6 +38,7 @@ public class CollisionRuler implements TimeListener {
                     bufferCollision.add(this.elements.get(j));
                 }
             }
+            // TODO make a cache system.
             this.elements.get(i).listenCollision(bufferCollision, timeDelta);
         }
     }
