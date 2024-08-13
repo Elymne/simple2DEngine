@@ -3,10 +3,11 @@ package org.engine.rework.elements.shapes;
 import java.util.ArrayList;
 import org.engine.rework.elements.Element;
 
-public abstract class RigidShape extends CollisionShape {
-    private int gravityForceDirection = RigidShape.FORCE_DIRECTION_NONE;
-    private double gravityForce = 0.0;
+public abstract class PhysicsShape extends CollisionShape {
+    private ArrayList<CollisionShape> cacheCollision;
 
+    private int gravityForceDirection = PhysicsShape.FORCE_DIRECTION_NONE;
+    private double gravityForce = 0.0;
     private double yVelocity = 0.0;
     private double xVelocity = 0.0;
 
@@ -14,7 +15,7 @@ public abstract class RigidShape extends CollisionShape {
     public static int FORCE_DIRECTION_X = 1;
     public static int FORCE_DIRECTION_y = 2;
 
-    public RigidShape(String name,
+    public PhysicsShape(String name,
             double posX, double posY,
             double width, double height,
             int zIndex, boolean isRuning,
@@ -22,7 +23,7 @@ public abstract class RigidShape extends CollisionShape {
         super(name, posX, posY, width, height, zIndex, elements);
     }
 
-    public RigidShape(double posX, double posY,
+    public PhysicsShape(double posX, double posY,
             double width, double height,
             int zIndex,
             ArrayList<Element> elements) {
@@ -54,7 +55,7 @@ public abstract class RigidShape extends CollisionShape {
 
     @Override
     public void listenCollision(ArrayList<CollisionShape> buffer, int delta) {
-        if (this.gravityForce == RigidShape.FORCE_DIRECTION_NONE) {
+        if (this.gravityForce == PhysicsShape.FORCE_DIRECTION_NONE) {
             return;
         }
 

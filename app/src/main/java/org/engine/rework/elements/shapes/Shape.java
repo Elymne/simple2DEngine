@@ -10,17 +10,14 @@ import org.engine.rework.elements.Element;
 public abstract class Shape extends Element {
     protected double posX;
     protected double posY;
-
     protected double width;
     protected double height;
-
     protected double scale = 1.0;
+    protected int zIndex;
 
     protected @Nullable Color backgroundColor;
     protected @Nullable Color borderColor;
     protected @Nullable String assetPath;
-
-    protected int zIndex;
 
     public Shape(String name,
             double posX, double posY,
@@ -69,8 +66,29 @@ public abstract class Shape extends Element {
         return this.zIndex;
     }
 
+    @Nullable
     public Image getImage() {
         return null;
+    }
+
+    @Nullable
+    public Color getBackgroundColor() {
+        return this.backgroundColor;
+    }
+
+    @Nullable
+    public Color getBorderColor() {
+        return this.borderColor;
+    }
+
+    public void move_to(double posX, double posY) {
+        this.posX = posX;
+        this.posY = posY;
+    }
+
+    public void move(double distX, double distY) {
+        this.posX += distX;
+        this.posY += distY;
     }
 
     public void drawFrame(Graphics g) {

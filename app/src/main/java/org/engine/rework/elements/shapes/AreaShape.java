@@ -29,8 +29,6 @@ abstract public class AreaShape extends CollisionShape {
 
     @Override
     public void listenCollision(ArrayList<CollisionShape> buffer, int timeDefinallta) {
-        // TODO : Find a cleaner wqy.
-
         for (int i = 0; i < buffer.size(); i++) {
             this.onCollision(buffer.get(i));
 

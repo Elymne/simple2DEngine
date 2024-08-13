@@ -22,6 +22,7 @@ abstract public class CollisionShape extends Shape implements CollisionListener 
             int zIndex,
             ArrayList<Element> elements) {
         super(posX, posY, width, height, zIndex, elements);
+        CollisionRuler.getInstance().addElement(this);
     }
 
     public int getCollisionFlag() {
