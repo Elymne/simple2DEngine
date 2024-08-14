@@ -8,20 +8,31 @@ import org.engine.core.rulers.time.TimeListener;
 
 public abstract class Element implements TimeListener {
     private @Nonnull final String key;
-    private @Nonnull final ArrayList<Element> subElements;
+    private final ArrayList<Element> subElements = new ArrayList<Element>();
+    private @Nullable Element parent = null;
 
-    public Element(String name, ArrayList<Element> elements) {
+    public Element(String name) {
         this.key = name;
-        this.subElements = elements;
     }
 
-    public Element(ArrayList<Element> elements) {
+    public Element() {
         this.key = UUID.randomUUID().toString();
-        this.subElements = elements;
     }
 
     public String getKey() {
         return key;
+    }
+
+    public void addSubElement(Element element) {
+        element.setParent(this);
+        this.subElements.add(element);
+    }
+
+    public void addSubElements(ArrayList<Element> elements) {
+        for (Element element : elements) {
+            element.setParent(this);
+        }
+        this.subElements.addAll(elements);
     }
 
     @Nullable
@@ -48,10 +59,6 @@ public abstract class Element implements TimeListener {
         return this.subElements;
     }
 
-    public void addSubElement(Element element) {
-        this.subElements.add(element);
-    }
-
     public void removeSubElement(Element element) {
         this.subElements.remove(element);
     }
@@ -60,5 +67,14 @@ public abstract class Element implements TimeListener {
         this.subElements.removeIf(element -> {
             return element.key == key;
         });
+    }
+
+    @Nullable
+    public Element getParent() {
+        return this.parent;
+    }
+
+    public void setParent(Element parent) {
+        this.parent = parent;
     }
 }

@@ -3,11 +3,13 @@ package org.engine.rework.elements.shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.util.ArrayList;
 import javax.annotation.Nullable;
+import org.engine.core.rulers.camera.CameraRuler;
 import org.engine.rework.elements.Element;
 
 public abstract class Shape extends Element {
+    private final CameraRuler cameraRuler;
+
     protected double posX;
     protected double posY;
     protected double width;
@@ -19,19 +21,14 @@ public abstract class Shape extends Element {
     protected @Nullable Color borderColor;
     protected @Nullable String assetPath;
 
-    public Shape(String name,
-            double posX, double posY,
-            double width, double height,
-            int zIndex,
-            ArrayList<Element> elements) {
-        super(name, elements);
+    public Shape(String name, double posX, double posY, double width, double height, int zIndex) {
+        super(name);
+        this.cameraRuler = CameraRuler.getInstance();
     }
 
-    public Shape(double posX, double posY,
-            double width, double height,
-            int zIndex,
-            ArrayList<Element> elements) {
-        super(elements);
+    public Shape(double posX, double posY, double width, double height, int zIndex) {
+        super();
+        this.cameraRuler = CameraRuler.getInstance();
     }
 
     public double getPosX() {
@@ -92,18 +89,20 @@ public abstract class Shape extends Element {
     }
 
     public void drawFrame(Graphics g) {
+        final int relPointX = (int) this.cameraRuler.getDistFromFocus_X(getPointX());
+        final int relPointY = (int) this.cameraRuler.getDistFromFocus_Y(getPointY());
+        final int relWidth = (int) getWidth();
+        final int relHeight = (int) getHeight();
         if (this.backgroundColor != null) {
             g.setColor(this.backgroundColor);
-            g.fillRect((int) this.getPointX(), (int) this.getPointY(), (int) this.width, (int) this.height);
+            g.fillRect(relPointX, relPointY, relWidth, relHeight);
         }
-
         if (this.assetPath != null) {
-            g.drawImage(this.getImage(), (int) this.getPointX(), (int) this.getPointY(), null);
+            g.drawImage(this.getImage(), relPointX, relPointY, null);
         }
-
         if (this.borderColor != null) {
             g.setColor(this.borderColor);
-            g.drawRect((int) this.getPointX(), (int) this.getPointY(), (int) this.width, (int) this.height);
+            g.drawRect(relPointX, relPointY, relWidth, relHeight);
         }
     }
 }

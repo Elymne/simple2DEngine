@@ -1,32 +1,23 @@
 package org.engine.rework.elements.shapes;
 
-import java.util.ArrayList;
-import org.engine.rework.elements.Element;
 import org.engine.rework.rulers.collision.CollisionListener;
 import org.engine.rework.rulers.collision.CollisionRuler;
 
 abstract public class CollisionShape extends Shape implements CollisionListener {
     protected int collisionFlag;
 
-    public CollisionShape(String name,
-            double posX, double posY,
-            double width, double height,
-            int zIndex,
-            ArrayList<Element> elements) {
-        super(name, posX, posY, width, height, zIndex, elements);
+    public CollisionShape(String name, double posX, double posY, double width, double height, int zIndex) {
+        super(name, posX, posY, width, height, zIndex);
         CollisionRuler.getInstance().addElement(this);
     }
 
-    public CollisionShape(double posX, double posY,
-            double width, double height,
-            int zIndex,
-            ArrayList<Element> elements) {
-        super(posX, posY, width, height, zIndex, elements);
+    public CollisionShape(double posX, double posY, double width, double height, int zIndex) {
+        super(posX, posY, width, height, zIndex);
         CollisionRuler.getInstance().addElement(this);
     }
 
     public int getCollisionFlag() {
-        return collisionFlag;
+        return this.collisionFlag;
     }
 
     public void setCollisionFlag(int collisionFlag) {
@@ -37,18 +28,15 @@ abstract public class CollisionShape extends Shape implements CollisionListener 
         if (element == null) {
             return false;
         }
-
         if (this == element) {
             return false;
         }
-
         if (this.getPointX() <= element.getPointX() + element.getWidth() &&
                 this.getPointX() + this.getWidth() >= element.getPointX() &&
                 this.getPointY() >= element.getPointY() - element.getHeight() &&
                 this.getPointY() - this.getHeight() <= element.getPointY()) {
             return true;
         }
-
         return false;
     }
 }

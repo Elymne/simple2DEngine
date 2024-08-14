@@ -13,12 +13,9 @@ public class CollisionRuler implements TimeListener {
     public static CollisionRuler getInstance() {
         if (instance == null) {
             instance = new CollisionRuler();
+            TimeRuler.getInstance().addNewListener(instance);
         }
         return instance;
-    }
-
-    private CollisionRuler() {
-        TimeRuler.getInstance().addNewListener(this);
     }
 
     public void addElement(CollisionShape element) {
@@ -26,11 +23,11 @@ public class CollisionRuler implements TimeListener {
     }
 
     public void removeElement(CollisionShape element) {
-        elements.remove(element);
+        this.elements.remove(element);
     }
 
     @Override
-    public void onNextFrame(int timeDelta) {
+    public void onNextFrame(int delta) {
         for (int i = 0; i < this.elements.size(); i++) {
             final ArrayList<CollisionShape> bufferCollision = new ArrayList<CollisionShape>();
             for (int j = 0; j < this.elements.size(); j++) {
@@ -38,7 +35,7 @@ public class CollisionRuler implements TimeListener {
                     bufferCollision.add(this.elements.get(j));
                 }
             }
-            this.elements.get(i).listenCollision(bufferCollision, timeDelta);
+            this.elements.get(i).listenCollision(bufferCollision, delta);
         }
     }
 }
