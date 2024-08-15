@@ -23,11 +23,21 @@ public abstract class Shape extends Element {
 
     public Shape(String name, double posX, double posY, double width, double height, int zIndex) {
         super(name);
+        this.posX = posX;
+        this.posY = posY;
+        this.width = width;
+        this.height = height;
+        this.zIndex = zIndex;
         this.cameraRuler = CameraRuler.getInstance();
     }
 
     public Shape(double posX, double posY, double width, double height, int zIndex) {
         super();
+        this.posX = posX;
+        this.posY = posY;
+        this.width = width;
+        this.height = height;
+        this.zIndex = zIndex;
         this.cameraRuler = CameraRuler.getInstance();
     }
 
@@ -91,8 +101,8 @@ public abstract class Shape extends Element {
     public void drawFrame(Graphics g) {
         final int relPointX = (int) this.cameraRuler.getDrawDistance_X(getPointX());
         final int relPointY = (int) this.cameraRuler.getDrawDistance_Y(getPointY());
-        final int relWidth = (int) getWidth();
-        final int relHeight = (int) getHeight();
+        final int relWidth = (int) this.getWidth();
+        final int relHeight = (int) this.getHeight();
         if (this.backgroundColor != null) {
             g.setColor(this.backgroundColor);
             g.fillRect(relPointX, relPointY, relWidth, relHeight);

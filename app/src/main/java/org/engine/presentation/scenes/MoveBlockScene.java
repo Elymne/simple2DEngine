@@ -15,5 +15,8 @@ public class MoveBlockScene extends Scene {
         cameraRuler.setFocus(block);
         this.addElement(this.floor);
         this.addElement(this.block);
+
+        this.block.slide(0, -1000, 10_000);
     }
+
 }

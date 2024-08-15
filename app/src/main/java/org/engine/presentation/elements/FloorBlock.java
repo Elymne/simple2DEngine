@@ -9,8 +9,8 @@ import org.engine.core.elements.shapes.StaticShape;
 public class FloorBlock extends StaticShape {
     public FloorBlock(double posX, double posY) {
         super(posX, posY, 1000, 20, 2);
-        this.backgroundColor = new Color(0xf0f0f0);
-        this.borderColor = new Color(0xf1f1f1);
+        this.backgroundColor = Color.BLUE;
+        this.borderColor = Color.BLUE.darker().darker();
     }
 
     @Override

@@ -53,23 +53,10 @@ abstract public class MovableShape extends CollisionShape {
         if (this.currentNextPosDuration <= 0) {
             return;
         }
-        if (this.nextDistX <= 0 && this.nextDistY <= 0) {
-            this.currentNextPosDuration = 0;
-            return;
-        }
         final double di = this.totalNextPosDuration / delta;
         this.currentNextPosDuration -= delta;
-        for (CollisionShape shape : buffer) {
-            if (this.getPointX() >= shape.getPointX() + shape.getWidth()
-                    || this.getPointX() + this.getWidth() >= shape.getPointX()) {
-                this.nextDistX = 0;
-            }
-            if (this.getPointY() >= shape.getPointY() + shape.getHeight()
-                    || this.getPointY() + this.getHeight() >= shape.getPointY()) {
-                this.nextDistY = 0;
-            }
-        }
         this.posX += this.nextDistX / di;
         this.posY += this.nextDistY / di;
+
     }
 }
