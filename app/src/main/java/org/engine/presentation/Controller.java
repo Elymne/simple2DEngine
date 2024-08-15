@@ -5,7 +5,7 @@ import org.engine.core.rulers.frame.FrameRuler;
 import org.engine.core.rulers.scene.SceneRuler;
 import org.engine.core.rulers.time.TimeListener;
 import org.engine.core.rulers.time.TimeRuler;
-import org.engine.presentation.scenes.MoveBlockScene;
+import org.engine.presentation.PhysicsSceneTest.PhysicsSceneTest;
 
 public class Controller implements TimeListener {
     private final TimeRuler timeRuler = TimeRuler.getInstance();
@@ -22,7 +22,7 @@ public class Controller implements TimeListener {
     }
 
     public void start() {
-        this.sceneRuler.setCurrentScene(new MoveBlockScene());
+        this.sceneRuler.setCurrentScene(new PhysicsSceneTest());
         this.timeRuler.run(TimeRuler.SIXTY_FPS);
     }
 

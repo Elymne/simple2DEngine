@@ -1,4 +1,4 @@
-package org.engine.presentation.elements;
+package org.engine.presentation.HitboxSceneTest.elements;
 
 import java.awt.Color;
 import org.engine.core.elements.shapes.AreaShape;

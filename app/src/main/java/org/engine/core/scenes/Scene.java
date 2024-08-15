@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import org.engine.core.elements.Element;
+import org.engine.core.rulers.camera.CameraRuler;
 
 public abstract class Scene {
-    protected @Nonnull final String key;
-    protected final ArrayList<Element> elements = new ArrayList<Element>();
+    protected final CameraRuler cameraRuler = CameraRuler.getInstance();
+    private @Nonnull final String key;
+    private final ArrayList<Element> elements = new ArrayList<Element>();
 
     public Scene(String key) {
         this.key = key;
