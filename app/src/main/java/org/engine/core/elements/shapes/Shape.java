@@ -73,6 +73,34 @@ public abstract class Shape extends Element {
         return zIndex;
     }
 
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
+    }
+
+    public void setzIndex(int zIndex) {
+        this.zIndex = zIndex;
+    }
+
+    public int getzIndex() {
+        return zIndex;
+    }
+
     @Nullable
     public Image getImage() {
         return null;
@@ -88,14 +116,16 @@ public abstract class Shape extends Element {
         return borderColor;
     }
 
-    public void move_to(double posX, double posY) {
-        this.posX = posX;
-        this.posY = posY;
+    public void setImage(String assetPath) {
+        this.assetPath = assetPath;
     }
 
-    public void move(double distX, double distY) {
-        posX += distX;
-        posY += distY;
+    public void setBackgroundColor(Color color) {
+        backgroundColor = color;
+    }
+
+    public void setBorderColor(Color color) {
+        borderColor = color;
     }
 
     public void drawFrame(Graphics g) {
