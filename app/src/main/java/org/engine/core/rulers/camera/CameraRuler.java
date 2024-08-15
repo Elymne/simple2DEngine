@@ -1,14 +1,13 @@
 package org.engine.core.rulers.camera;
 
-import org.engine.core.characteristics.Position;
-import org.engine.core.constants.CustomErrors;
-import org.engine.core.elements.Element;
-import org.engine.core.rulers.viewport.ViewportRuler;
+import javax.swing.JFrame;
+import org.engine.core.elements.shapes.Shape;
 
 public class CameraRuler {
-    private ViewportRuler viewportRuler = ViewportRuler.getInstance();
+    private Shape focus;
+    private JFrame frame;
+
     private static CameraRuler instance;
-    private Position focus = new Position(0, 0);
 
     public static CameraRuler getInstance() {
         if (instance == null) {
@@ -17,20 +16,33 @@ public class CameraRuler {
         return instance;
     }
 
-    public void setFocus(Element element) {
-        final Position positionNode = (Position) element.findCharacteristic(Position.class);
-        if (positionNode == null) {
-            System.err.println(CustomErrors.NO_POSITION_FOUND);
-            return;
+    public void init(JFrame frame) {
+        this.frame = frame;
+    }
+
+    public void setFocus(Shape element) {
+        this.focus = element;
+    }
+
+    public double getDrawDistance_X(double posX) {
+        if (this.frame == null) {
+            System.err.println("No Frame attached to current Camera Ruler. Use init() function.");
+            return 0;
         }
-        focus = positionNode;
+        if (this.focus == null) {
+            return (this.frame.getWidth() / 2) + (posX - 0);
+        }
+        return (this.frame.getWidth() / 2) + (posX - this.focus.getPosX());
     }
 
-    public double getDistFromFocus_X(double posX) {
-        return (viewportRuler.getFrameWidth() / 2) + (posX - focus.getPosX());
-    }
-
-    public double getDistFromFocus_Y(double posY) {
-        return (viewportRuler.getFrameHeight() / 2) + (-posY + focus.getPosY());
+    public double getDrawDistance_Y(double posY) {
+        if (this.frame == null) {
+            System.err.println("No Frame attached to current Camera Ruler. Use init() function.");
+            return 0;
+        }
+        if (this.focus == null) {
+            return (this.frame.getHeight() / 2) + (-posY + 0);
+        }
+        return (this.frame.getHeight() / 2) + (-posY + this.focus.getPosY());
     }
 }

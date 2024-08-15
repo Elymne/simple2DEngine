@@ -1,4 +1,4 @@
-package org.engine.rework.rulers.frame;
+package org.engine.core.rulers.frame;
 
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -49,14 +49,6 @@ public class FrameRuler extends JFrame {
             return;
         }
         System.err.println("Unknown display mode");
-    }
-
-    public void display() {
-        this.setVisible(true);
-    }
-
-    public void hide() {
-        this.setVisible(false);
     }
 
     public int getScreenMode() {

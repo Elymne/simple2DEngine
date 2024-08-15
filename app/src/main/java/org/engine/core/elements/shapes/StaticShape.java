@@ -1,4 +1,4 @@
-package org.engine.rework.elements.shapes;
+package org.engine.core.elements.shapes;
 
 abstract public class StaticShape extends CollisionShape {
     public StaticShape(String name, double posX, double posY, double width, double height, int zIndex) {

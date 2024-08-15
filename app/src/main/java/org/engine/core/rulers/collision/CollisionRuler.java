@@ -1,9 +1,9 @@
-package org.engine.rework.rulers.collision;
+package org.engine.core.rulers.collision;
 
 import java.util.ArrayList;
+import org.engine.core.elements.shapes.CollisionShape;
 import org.engine.core.rulers.time.TimeListener;
 import org.engine.core.rulers.time.TimeRuler;
-import org.engine.rework.elements.shapes.CollisionShape;
 
 public class CollisionRuler implements TimeListener {
     private final ArrayList<CollisionShape> elements = new ArrayList<CollisionShape>();

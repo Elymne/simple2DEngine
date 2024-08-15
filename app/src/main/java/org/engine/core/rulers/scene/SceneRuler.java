@@ -4,11 +4,13 @@ import java.awt.Graphics;
 import javax.annotation.Nullable;
 import javax.swing.JPanel;
 import org.engine.core.elements.Element;
+import org.engine.core.elements.shapes.Shape;
 import org.engine.core.scenes.Scene;
 
 public class SceneRuler extends JPanel {
-    private static SceneRuler instance;
     private @Nullable Scene currentScene;
+
+    private static SceneRuler instance;
 
     public static SceneRuler getInstance() {
         if (instance == null) {
@@ -21,13 +23,17 @@ public class SceneRuler extends JPanel {
         this.currentScene = scene;
     }
 
+    public Scene getCurrentScene() {
+        return this.currentScene;
+    }
+
     public void clearScene() {
         this.currentScene = null;
     }
 
     public void drawFrame() {
-        repaint();
-        revalidate();
+        this.repaint();
+        this.revalidate();
     }
 
     @SuppressWarnings("null")
@@ -38,9 +44,10 @@ public class SceneRuler extends JPanel {
             System.err.println("No scene is currently running. Cannot draw frames.");
             return;
         }
-
-        for (Element element : currentScene.getElements()) {
-            element.paint(g);
+        for (Element element : this.currentScene.getElements()) {
+            if (element instanceof Shape) {
+                ((Shape) element).drawFrame(g);
+            }
         }
     }
 }

@@ -5,14 +5,17 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class TimeRuler {
-    private Timer currentTimer = new Timer();
-    private TimeState state = TimeState.UNDEFINED;
-    private int fpsCap = TimeRuler.SIXTY_FPS;
-    private final ArrayList<TimeListener> physicsListeners = new ArrayList<TimeListener>();
+    private final ArrayList<TimeListener> listeners = new ArrayList<TimeListener>();
+    private final Timer currentTimer = new Timer();
+    private int state = TimeRuler.UNDEFINED_STATE;
 
+    public static final int ONE_TWENTY_FPS = 8;
     public static final int SIXTY_FPS = 16;
     public static final int THIRTY_FPS = 33;
-    public static final int NO_CAP = -1;
+
+    public static final int UNDEFINED_STATE = 0;
+    public static final int RUNNING_STATE = 1;
+    public static final int WAITING_STATE = 2;
 
     private static TimeRuler instance;
 
@@ -23,23 +26,12 @@ public class TimeRuler {
         return instance;
     }
 
-    public void setFrameRate(int fpsCap) {
-        this.fpsCap = fpsCap;
-    }
-
-    public void run() {
-        if (state == TimeState.RUNNING) {
-            System.err.println("Physics already running");
+    public void run(int fpsCap) {
+        if (this.state == TimeRuler.RUNNING_STATE) {
+            System.err.println("Time ruler is already running.");
             return;
         }
-
-        state = TimeState.RUNNING;
-
-        if (fpsCap == TimeRuler.NO_CAP) {
-            // create a thread with infinite loop.
-            return;
-        }
-
+        state = TimeRuler.RUNNING_STATE;
         currentTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -49,33 +41,25 @@ public class TimeRuler {
     }
 
     public void pause() {
-        if (state == TimeState.WAITING) {
+        if (state == TimeRuler.WAITING_STATE) {
             System.err.println("Physics already pausing");
             return;
         }
-
-        if (fpsCap == TimeRuler.NO_CAP) {
-            // create a thread with infinite loop.
-            return;
-        }
-
         currentTimer.cancel();
-
-        state = TimeState.WAITING;
-
+        state = TimeRuler.WAITING_STATE;
     }
 
     public void addNewListener(TimeListener physicsListener) {
-        physicsListeners.add(physicsListener);
+        listeners.add(physicsListener);
     }
 
     public void removeListener(TimeListener physicsListener) {
-        physicsListeners.remove(physicsListener);
+        listeners.remove(physicsListener);
     }
 
     private void notifyListeners(int fpsTarget) {
-        for (TimeListener physicsListener : physicsListeners) {
-            physicsListener.onNextFrame(fpsTarget);
+        for (TimeListener listener : listeners) {
+            listener.onNextFrame(fpsTarget);
         }
     }
 }

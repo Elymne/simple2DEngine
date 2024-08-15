@@ -1,7 +1,7 @@
-package org.engine.rework.elements.shapes;
+package org.engine.core.elements.shapes;
 
-import org.engine.rework.rulers.collision.CollisionListener;
-import org.engine.rework.rulers.collision.CollisionRuler;
+import org.engine.core.rulers.collision.CollisionListener;
+import org.engine.core.rulers.collision.CollisionRuler;
 
 abstract public class CollisionShape extends Shape implements CollisionListener {
     protected int collisionFlag;

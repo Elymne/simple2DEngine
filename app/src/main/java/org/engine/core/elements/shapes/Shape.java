@@ -1,11 +1,11 @@
-package org.engine.rework.elements.shapes;
+package org.engine.core.elements.shapes;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.annotation.Nullable;
+import org.engine.core.elements.Element;
 import org.engine.core.rulers.camera.CameraRuler;
-import org.engine.rework.elements.Element;
 
 public abstract class Shape extends Element {
     private final CameraRuler cameraRuler;
@@ -89,8 +89,8 @@ public abstract class Shape extends Element {
     }
 
     public void drawFrame(Graphics g) {
-        final int relPointX = (int) this.cameraRuler.getDistFromFocus_X(getPointX());
-        final int relPointY = (int) this.cameraRuler.getDistFromFocus_Y(getPointY());
+        final int relPointX = (int) this.cameraRuler.getDrawDistance_X(getPointX());
+        final int relPointY = (int) this.cameraRuler.getDrawDistance_Y(getPointY());
         final int relWidth = (int) getWidth();
         final int relHeight = (int) getHeight();
         if (this.backgroundColor != null) {
