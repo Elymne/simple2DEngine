@@ -29,6 +29,16 @@ public abstract class Scene {
         this.elements.addAll(elements);
     }
 
+    public void removeElement(Element element) {
+        this.elements.remove(element);
+    }
+
+    public void removeElement(String key) {
+        this.elements.removeIf(element -> {
+            return element.getKey() == key;
+        });
+    }
+
     @Nullable
     public Element findElement(Class<Element> elementClass) {
         for (Element element : this.elements) {
