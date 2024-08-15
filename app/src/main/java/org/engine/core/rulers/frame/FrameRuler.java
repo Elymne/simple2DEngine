@@ -22,15 +22,11 @@ public class FrameRuler extends JFrame {
     public void init(JPanel panel, String title, int width, int height) {
         this.width = width;
         this.height = height;
-        this.getContentPane().setBackground(new Color(0x000000));
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(false);
-        this.getContentPane().add(panel);
-        this.setTitle(title);
-    }
-
-    public void updateTitle(String title) {
-        this.setTitle(title);
+        getContentPane().setBackground(new Color(0x000000));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
+        getContentPane().add(panel);
+        setTitle(title);
     }
 
     public void updateViewport(int width, int height) {
@@ -40,34 +36,34 @@ public class FrameRuler extends JFrame {
 
     public void setDisplayMode(int mode) {
         if (mode == FrameRuler.WINDOWED_MODE) {
-            this.setExtendedState(JFrame.NORMAL);
-            this.setSize(width, height);
+            setExtendedState(JFrame.NORMAL);
+            setSize(width, height);
             return;
         }
         if (mode == FrameRuler.BORDERLESS_FULLSCREEN_MODE) {
-            this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
             return;
         }
         System.err.println("Unknown display mode");
     }
 
     public int getScreenMode() {
-        return this.isUndecorated() ? FrameRuler.BORDERLESS_FULLSCREEN_MODE : FrameRuler.WINDOWED_MODE;
+        return isUndecorated() ? FrameRuler.BORDERLESS_FULLSCREEN_MODE : FrameRuler.WINDOWED_MODE;
     }
 
     public int getFrameWidth() {
-        return this.getWidth();
+        return getWidth();
     }
 
     public int getFrameHeight() {
-        return this.getHeight();
+        return getHeight();
     }
 
     public int getWidth() {
-        return this.width;
+        return width;
     }
 
     public int getHeight() {
-        return this.height;
+        return height;
     }
 }

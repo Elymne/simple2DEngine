@@ -24,16 +24,12 @@ public class SceneRuler extends JPanel {
     }
 
     public Scene getCurrentScene() {
-        return this.currentScene;
-    }
-
-    public void clearScene() {
-        this.currentScene = null;
+        return currentScene;
     }
 
     public void drawFrame() {
-        this.repaint();
-        this.revalidate();
+        repaint();
+        revalidate();
     }
 
     @SuppressWarnings("null")
@@ -44,7 +40,7 @@ public class SceneRuler extends JPanel {
             System.err.println("No scene is currently running. Cannot draw frames.");
             return;
         }
-        for (Element element : this.currentScene.getElements()) {
+        for (Element element : currentScene.getElements()) {
             if (element instanceof Shape) {
                 ((Shape) element).drawFrame(g);
             }

@@ -8,15 +8,15 @@ import org.engine.core.rulers.time.TimeListener;
 
 public abstract class Element implements TimeListener {
     private @Nonnull final String key;
-    private final ArrayList<Element> subElements = new ArrayList<Element>();
     private @Nullable Element parent = null;
+    private final ArrayList<Element> subElements = new ArrayList<Element>();
 
-    public Element(String name) {
-        this.key = name;
+    public Element(String key) {
+        this.key = key;
     }
 
     public Element() {
-        this.key = UUID.randomUUID().toString();
+        key = UUID.randomUUID().toString();
     }
 
     public String getKey() {
@@ -25,19 +25,19 @@ public abstract class Element implements TimeListener {
 
     public void addSubElement(Element element) {
         element.setParent(this);
-        this.subElements.add(element);
+        subElements.add(element);
     }
 
     public void addSubElements(ArrayList<Element> elements) {
         for (Element element : elements) {
             element.setParent(this);
         }
-        this.subElements.addAll(elements);
+        subElements.addAll(elements);
     }
 
     @Nullable
     public Element findSubElement(Class<Element> elementClass) {
-        for (Element element : this.subElements) {
+        for (Element element : subElements) {
             if (element.getClass() == elementClass) {
                 return element;
             }
@@ -47,7 +47,7 @@ public abstract class Element implements TimeListener {
 
     @Nullable
     public Element findSubElement(String key) {
-        for (Element element : this.subElements) {
+        for (Element element : subElements) {
             if (element.key == key) {
                 return element;
             }
@@ -56,22 +56,22 @@ public abstract class Element implements TimeListener {
     }
 
     public ArrayList<Element> getSubElements() {
-        return this.subElements;
+        return subElements;
     }
 
     public void removeSubElement(Element element) {
-        this.subElements.remove(element);
+        subElements.remove(element);
     }
 
     public void removeSubElement(String key) {
-        this.subElements.removeIf(element -> {
+        subElements.removeIf(element -> {
             return element.key == key;
         });
     }
 
     @Nullable
     public Element getParent() {
-        return this.parent;
+        return parent;
     }
 
     public void setParent(Element parent) {

@@ -27,7 +27,7 @@ public class TimeRuler {
     }
 
     public void run(int fpsCap) {
-        if (this.state == TimeRuler.RUNNING_STATE) {
+        if (state == TimeRuler.RUNNING_STATE) {
             System.err.println("Time ruler is already running.");
             return;
         }

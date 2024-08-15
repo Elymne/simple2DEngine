@@ -28,7 +28,7 @@ public abstract class Shape extends Element {
         this.width = width;
         this.height = height;
         this.zIndex = zIndex;
-        this.cameraRuler = CameraRuler.getInstance();
+        cameraRuler = CameraRuler.getInstance();
     }
 
     public Shape(double posX, double posY, double width, double height, int zIndex) {
@@ -38,39 +38,39 @@ public abstract class Shape extends Element {
         this.width = width;
         this.height = height;
         this.zIndex = zIndex;
-        this.cameraRuler = CameraRuler.getInstance();
+        cameraRuler = CameraRuler.getInstance();
     }
 
     public double getPosX() {
-        return this.posX;
+        return posX;
     }
 
     public double getPosY() {
-        return this.posY;
+        return posY;
     }
 
     public double getPointX() {
-        return this.posX - (width / 2);
+        return posX - (width / 2);
     }
 
     public double getPointY() {
-        return this.posY + (height / 2);
+        return posY + (height / 2);
     }
 
     public double getWidth() {
-        return this.width;
+        return width;
     }
 
     public double getHeight() {
-        return this.height;
+        return height;
     }
 
     public double getScale() {
-        return this.scale;
+        return scale;
     }
 
     public int getZIndex() {
-        return this.zIndex;
+        return zIndex;
     }
 
     @Nullable
@@ -80,12 +80,12 @@ public abstract class Shape extends Element {
 
     @Nullable
     public Color getBackgroundColor() {
-        return this.backgroundColor;
+        return backgroundColor;
     }
 
     @Nullable
     public Color getBorderColor() {
-        return this.borderColor;
+        return borderColor;
     }
 
     public void move_to(double posX, double posY) {
@@ -94,24 +94,24 @@ public abstract class Shape extends Element {
     }
 
     public void move(double distX, double distY) {
-        this.posX += distX;
-        this.posY += distY;
+        posX += distX;
+        posY += distY;
     }
 
     public void drawFrame(Graphics g) {
-        final int relPointX = (int) this.cameraRuler.getDrawDistance_X(getPointX());
-        final int relPointY = (int) this.cameraRuler.getDrawDistance_Y(getPointY());
-        final int relWidth = (int) this.getWidth();
-        final int relHeight = (int) this.getHeight();
-        if (this.backgroundColor != null) {
-            g.setColor(this.backgroundColor);
+        final int relPointX = (int) cameraRuler.getDrawDistance_X(getPointX());
+        final int relPointY = (int) cameraRuler.getDrawDistance_Y(getPointY());
+        final int relWidth = (int) getWidth();
+        final int relHeight = (int) getHeight();
+        if (backgroundColor != null) {
+            g.setColor(backgroundColor);
             g.fillRect(relPointX, relPointY, relWidth, relHeight);
         }
-        if (this.assetPath != null) {
-            g.drawImage(this.getImage(), relPointX, relPointY, null);
+        if (assetPath != null) {
+            g.drawImage(getImage(), relPointX, relPointY, null);
         }
-        if (this.borderColor != null) {
-            g.setColor(this.borderColor);
+        if (borderColor != null) {
+            g.setColor(borderColor);
             g.drawRect(relPointX, relPointY, relWidth, relHeight);
         }
     }

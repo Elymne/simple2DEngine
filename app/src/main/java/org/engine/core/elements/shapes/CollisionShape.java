@@ -17,7 +17,7 @@ abstract public class CollisionShape extends Shape implements CollisionListener 
     }
 
     public int getCollisionFlag() {
-        return this.collisionFlag;
+        return collisionFlag;
     }
 
     public void setCollisionFlag(int collisionFlag) {
@@ -31,10 +31,10 @@ abstract public class CollisionShape extends Shape implements CollisionListener 
         if (this == element) {
             return false;
         }
-        if (this.getPointX() <= element.getPointX() + element.getWidth() &&
-                this.getPointX() + this.getWidth() >= element.getPointX() &&
-                this.getPointY() >= element.getPointY() - element.getHeight() &&
-                this.getPointY() - this.getHeight() <= element.getPointY()) {
+        if (getPointX() <= element.getPointX() + element.getWidth() &&
+                getPointX() + getWidth() >= element.getPointX() &&
+                getPointY() >= element.getPointY() - element.getHeight() &&
+                getPointY() - getHeight() <= element.getPointY()) {
             return true;
         }
         return false;

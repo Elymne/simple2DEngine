@@ -22,17 +22,17 @@ abstract public class AreaShape extends CollisionShape {
     @Override
     public void listenCollision(ArrayList<CollisionShape> buffer, int timeDefinallta) {
         for (int i = 0; i < buffer.size(); i++) {
-            this.onCollision(buffer.get(i));
-            if (!this.collisionShapeContacts.contains(buffer.get(i))) {
-                this.onAreaEnter(buffer.get(i));
-                this.collisionShapeContacts.add(buffer.get(i));
+            onCollision(buffer.get(i));
+            if (!collisionShapeContacts.contains(buffer.get(i))) {
+                onAreaEnter(buffer.get(i));
+                collisionShapeContacts.add(buffer.get(i));
             }
         }
-        final ArrayList<CollisionShape> diff = new ArrayList<CollisionShape>(this.collisionShapeContacts);
+        final ArrayList<CollisionShape> diff = new ArrayList<CollisionShape>(collisionShapeContacts);
         diff.removeAll(buffer);
-        this.collisionShapeContacts.removeAll(diff);
+        collisionShapeContacts.removeAll(diff);
         for (int i = 0; i < diff.size(); i++) {
-            this.onAreaLeave(diff.get(i));
+            onAreaLeave(diff.get(i));
         }
     }
 }

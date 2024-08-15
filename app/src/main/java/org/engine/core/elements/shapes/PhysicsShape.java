@@ -6,7 +6,6 @@ public abstract class PhysicsShape extends CollisionShape {
     private int gravityForceDirection = PhysicsShape.FORCE_DIRECTION_NONE;
     private double gravityForce = 0.0;
     private double frictionForce = 0.0;
-
     private double yVelocity = 0.0;
     private double xVelocity = 0.0;
 
@@ -50,7 +49,7 @@ public abstract class PhysicsShape extends CollisionShape {
     }
 
     public int getGravityForceDirection() {
-        return this.gravityForceDirection;
+        return gravityForceDirection;
     }
 
     public double getxVelocity() {
@@ -62,11 +61,11 @@ public abstract class PhysicsShape extends CollisionShape {
     }
 
     public double getGravityForce() {
-        return this.gravityForce;
+        return gravityForce;
     }
 
     public double getFrictionForce() {
-        return this.frictionForce;
+        return frictionForce;
     }
 
     public void changeForceDirection(int gravityForceDirection) {
@@ -86,40 +85,40 @@ public abstract class PhysicsShape extends CollisionShape {
 
     @Override
     public void listenCollision(ArrayList<CollisionShape> buffer, int delta) {
-        this.posX += this.xVelocity * delta;
-        this.posY += this.yVelocity * delta;
-        switch (this.gravityForceDirection) {
+        posX += xVelocity * delta;
+        posY += yVelocity * delta;
+        switch (gravityForceDirection) {
             case PhysicsShape.FORCE_DIRECTION_Y:
-                applyFrictionForce(this.xVelocity, delta);
-                applyGravityforce(this.yVelocity, delta);
+                applyFrictionForce(xVelocity, delta);
+                applyGravityforce(yVelocity, delta);
                 break;
             case PhysicsShape.FORCE_DIRECTION_X:
-                applyGravityforce(this.xVelocity, delta);
-                applyFrictionForce(this.yVelocity, delta);
+                applyGravityforce(xVelocity, delta);
+                applyFrictionForce(yVelocity, delta);
                 break;
             default:
-                applyFrictionForce(this.xVelocity, delta);
-                applyFrictionForce(this.yVelocity, delta);
+                applyFrictionForce(xVelocity, delta);
+                applyFrictionForce(yVelocity, delta);
                 break;
         }
     }
 
     private void applyFrictionForce(double velocity, int delta) {
-        if (velocity > 0 && velocity - (this.frictionForce * delta) > 0) {
-            velocity -= this.frictionForce * delta;
+        if (velocity > 0 && velocity - (frictionForce * delta) > 0) {
+            velocity -= frictionForce * delta;
             return;
         }
-        if (velocity < 0 && velocity + (this.frictionForce * delta) < 0) {
-            velocity += this.frictionForce * delta;
+        if (velocity < 0 && velocity + (frictionForce * delta) < 0) {
+            velocity += frictionForce * delta;
             return;
         }
         velocity = 0;
     }
 
     private void applyGravityforce(double velocity, int delta) {
-        if (velocity > this.gravityForce * 10) {
-            velocity = this.gravityForce * 10;
+        if (velocity > gravityForce * 10) {
+            velocity = gravityForce * 10;
         }
-        velocity += this.gravityForce * delta;
+        velocity += gravityForce * delta;
     }
 }

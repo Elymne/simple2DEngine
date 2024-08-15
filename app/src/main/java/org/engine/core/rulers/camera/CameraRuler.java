@@ -21,28 +21,28 @@ public class CameraRuler {
     }
 
     public void setFocus(Shape element) {
-        this.focus = element;
+        focus = element;
     }
 
     public double getDrawDistance_X(double posX) {
-        if (this.frame == null) {
+        if (frame == null) {
             System.err.println("No Frame attached to current Camera Ruler. Use init() function.");
             return 0;
         }
-        if (this.focus == null) {
-            return (this.frame.getWidth() / 2) + (posX - 0);
+        if (focus == null) {
+            return (frame.getWidth() / 2) + (posX - 0);
         }
-        return (this.frame.getWidth() / 2) + (posX - this.focus.getPosX());
+        return (frame.getWidth() / 2) + (posX - focus.getPosX());
     }
 
     public double getDrawDistance_Y(double posY) {
-        if (this.frame == null) {
+        if (frame == null) {
             System.err.println("No Frame attached to current Camera Ruler. Use init() function.");
             return 0;
         }
-        if (this.focus == null) {
+        if (focus == null) {
             return (this.frame.getHeight() / 2) + (-posY + 0);
         }
-        return (this.frame.getHeight() / 2) + (-posY + this.focus.getPosY());
+        return (frame.getHeight() / 2) + (-posY + focus.getPosY());
     }
 }

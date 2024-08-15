@@ -28,14 +28,14 @@ public class CollisionRuler implements TimeListener {
 
     @Override
     public void onNextFrame(int delta) {
-        for (int i = 0; i < this.elements.size(); i++) {
+        for (int i = 0; i < elements.size(); i++) {
             final ArrayList<CollisionShape> bufferCollision = new ArrayList<CollisionShape>();
-            for (int j = 0; j < this.elements.size(); j++) {
-                if (this.elements.get(i).isCollidingWith(this.elements.get(j))) {
-                    bufferCollision.add(this.elements.get(j));
+            for (int j = 0; j < elements.size(); j++) {
+                if (elements.get(i).isCollidingWith(elements.get(j))) {
+                    bufferCollision.add(elements.get(j));
                 }
             }
-            this.elements.get(i).listenCollision(bufferCollision, delta);
+            elements.get(i).listenCollision(bufferCollision, delta);
         }
     }
 }
