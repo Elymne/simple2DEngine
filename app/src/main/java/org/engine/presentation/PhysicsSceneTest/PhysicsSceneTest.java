@@ -10,9 +10,8 @@ public class PhysicsSceneTest extends Scene {
 
     public PhysicsSceneTest() {
         super("Physics scene");
-        cameraRuler.setFocus(fallingBlock);
+        cameraRuler.setFocus(fallingBlock.getPosition());
         this.addElement(floor);
         this.addElement(fallingBlock);
     }
-
 }

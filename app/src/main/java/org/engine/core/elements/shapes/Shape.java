@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.annotation.Nullable;
+import org.engine.core.attributes.Vector2D;
 import org.engine.core.elements.Element;
 import org.engine.core.rulers.camera.CameraRuler;
 
 public abstract class Shape extends Element {
-    private final CameraRuler cameraRuler;
+    private final CameraRuler cameraRuler = CameraRuler.getInstance();
 
-    protected double posX;
-    protected double posY;
+    protected Vector2D pos;
     protected double width;
     protected double height;
     protected double scale = 1.0;
@@ -21,40 +21,32 @@ public abstract class Shape extends Element {
     protected @Nullable Color borderColor;
     protected @Nullable String assetPath;
 
-    public Shape(String name, double posX, double posY, double width, double height, int zIndex) {
+    public Shape(String name, Vector2D position, double width, double height, int zIndex) {
         super(name);
-        this.posX = posX;
-        this.posY = posY;
+        this.pos = position;
         this.width = width;
         this.height = height;
         this.zIndex = zIndex;
-        cameraRuler = CameraRuler.getInstance();
     }
 
-    public Shape(double posX, double posY, double width, double height, int zIndex) {
+    public Shape(Vector2D position, double width, double height, int zIndex) {
         super();
-        this.posX = posX;
-        this.posY = posY;
+        this.pos = position;
         this.width = width;
         this.height = height;
         this.zIndex = zIndex;
-        cameraRuler = CameraRuler.getInstance();
     }
 
-    public double getPosX() {
-        return posX;
-    }
-
-    public double getPosY() {
-        return posY;
+    public Vector2D getPosition() {
+        return pos;
     }
 
     public double getPointX() {
-        return posX - (width / 2);
+        return pos.x - (width / 2);
     }
 
     public double getPointY() {
-        return posY + (height / 2);
+        return pos.y + (height / 2);
     }
 
     public double getWidth() {
@@ -73,32 +65,20 @@ public abstract class Shape extends Element {
         return zIndex;
     }
 
-    public void setPosX(double posX) {
-        this.posX = posX;
-    }
-
-    public void setPosY(double posY) {
-        this.posY = posY;
-    }
-
-    public void setWidth(double width) {
+    public void updateWidth(double width) {
         this.width = width;
     }
 
-    public void setHeight(double height) {
+    public void updateHeight(double height) {
         this.height = height;
     }
 
-    public void setScale(double scale) {
+    public void updateScale(double scale) {
         this.scale = scale;
     }
 
-    public void setzIndex(int zIndex) {
+    public void updateZIndex(int zIndex) {
         this.zIndex = zIndex;
-    }
-
-    public int getzIndex() {
-        return zIndex;
     }
 
     @Nullable
@@ -116,15 +96,15 @@ public abstract class Shape extends Element {
         return borderColor;
     }
 
-    public void setImage(String assetPath) {
+    public void setImage(@Nullable String assetPath) {
         this.assetPath = assetPath;
     }
 
-    public void setBackgroundColor(Color color) {
+    public void setBackgroundColor(@Nullable Color color) {
         backgroundColor = color;
     }
 
-    public void setBorderColor(Color color) {
+    public void setBorderColor(@Nullable Color color) {
         borderColor = color;
     }
 

@@ -1,5 +1,6 @@
 package org.engine.presentation.HitboxSceneTest;
 
+import org.engine.core.attributes.Vector2D;
 import org.engine.core.scenes.Scene;
 import org.engine.presentation.HitboxSceneTest.elements.ColorChangerArea;
 import org.engine.presentation.HitboxSceneTest.elements.RedSquare;
@@ -10,10 +11,9 @@ public class HitboxSceneTest extends Scene {
 
     public HitboxSceneTest() {
         super("Hitbox scene");
-        cameraRuler.setFocus(block);
+        cameraRuler.setFocus(block.getPosition());
         this.addElement(block);
         this.addElement(colorChanger);
-        this.block.slide(0, -400, 10_000);
+        this.block.slide(new Vector2D(0, -400), 10_000);
     }
-
 }

@@ -1,18 +1,19 @@
 package org.engine.core.elements.shapes;
 
+import org.engine.core.attributes.Vector2D;
 import org.engine.core.rulers.collision.CollisionListener;
 import org.engine.core.rulers.collision.CollisionRuler;
 
 abstract public class CollisionShape extends Shape implements CollisionListener {
     protected int collisionFlag;
 
-    public CollisionShape(String name, double posX, double posY, double width, double height, int zIndex) {
-        super(name, posX, posY, width, height, zIndex);
+    public CollisionShape(String name, Vector2D position, double width, double height, int zIndex) {
+        super(name, position, width, height, zIndex);
         CollisionRuler.getInstance().addElement(this);
     }
 
-    public CollisionShape(double posX, double posY, double width, double height, int zIndex) {
-        super(posX, posY, width, height, zIndex);
+    public CollisionShape(Vector2D position, double width, double height, int zIndex) {
+        super(position, width, height, zIndex);
         CollisionRuler.getInstance().addElement(this);
     }
 

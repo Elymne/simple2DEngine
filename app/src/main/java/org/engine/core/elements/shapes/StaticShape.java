@@ -1,11 +1,13 @@
 package org.engine.core.elements.shapes;
 
+import org.engine.core.attributes.Vector2D;
+
 abstract public class StaticShape extends CollisionShape {
-    public StaticShape(String name, double posX, double posY, double width, double height, int zIndex) {
-        super(name, posX, posY, width, height, zIndex);
+    public StaticShape(String name, Vector2D position, double width, double height, int zIndex) {
+        super(name, position, width, height, zIndex);
     }
 
-    public StaticShape(double posX, double posY, double width, double height, int zIndex) {
-        super(posX, posY, width, height, zIndex);
+    public StaticShape(Vector2D position, double width, double height, int zIndex) {
+        super(position, width, height, zIndex);
     }
 }

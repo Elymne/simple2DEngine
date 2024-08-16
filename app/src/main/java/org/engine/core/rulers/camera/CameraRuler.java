@@ -1,10 +1,10 @@
 package org.engine.core.rulers.camera;
 
 import javax.swing.JFrame;
-import org.engine.core.elements.shapes.Shape;
+import org.engine.core.attributes.Vector2D;
 
 public class CameraRuler {
-    private Shape focus;
+    private Vector2D focus;
     private JFrame frame;
 
     private static CameraRuler instance;
@@ -20,8 +20,8 @@ public class CameraRuler {
         this.frame = frame;
     }
 
-    public void setFocus(Shape element) {
-        focus = element;
+    public void setFocus(Vector2D position) {
+        focus = position;
     }
 
     public double getDrawDistance_X(double posX) {
@@ -32,7 +32,7 @@ public class CameraRuler {
         if (focus == null) {
             return (frame.getWidth() / 2) + (posX - 0);
         }
-        return (frame.getWidth() / 2) + (posX - focus.getPosX());
+        return (frame.getWidth() / 2) + (posX - focus.x);
     }
 
     public double getDrawDistance_Y(double posY) {
@@ -43,6 +43,6 @@ public class CameraRuler {
         if (focus == null) {
             return (this.frame.getHeight() / 2) + (-posY + 0);
         }
-        return (frame.getHeight() / 2) + (-posY + focus.getPosY());
+        return (frame.getHeight() / 2) + (-posY + focus.y);
     }
 }

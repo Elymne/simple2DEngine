@@ -1,6 +1,7 @@
 package org.engine.core.elements.shapes;
 
 import java.util.ArrayList;
+import org.engine.core.attributes.Vector2D;
 
 abstract public class MovableShape extends CollisionShape {
     private double nextDistX = 0.0;
@@ -8,40 +9,40 @@ abstract public class MovableShape extends CollisionShape {
     private int totalNextPosDuration = 0;
     private int currentNextPosDuration = 0;
 
-    public MovableShape(String name, double posX, double posY, double width, double height, int zIndex) {
-        super(name, posX, posY, width, height, zIndex);
+    public MovableShape(String name, Vector2D position, double width, double height, int zIndex) {
+        super(name, position, width, height, zIndex);
     }
 
-    public MovableShape(double posX, double posY, double width, double height, int zIndex) {
-        super(posX, posY, width, height, zIndex);
+    public MovableShape(Vector2D position, double width, double height, int zIndex) {
+        super(position, width, height, zIndex);
     }
 
-    public void slide_to(double posX, double posY, int duration) {
-        nextDistX = posX - posX;
-        nextDistY = posY - posY;
+    public void slide_to(Vector2D distance, int duration) {
+        nextDistX = pos.x - distance.x;
+        nextDistY = pos.y - distance.y;
         totalNextPosDuration = duration;
         currentNextPosDuration = duration;
     }
 
-    public void slide(double distX, double distY, int duration) {
-        nextDistX = distX;
-        nextDistY = distY;
+    public void slide(Vector2D distance, int duration) {
+        nextDistX = distance.x;
+        nextDistY = distance.y;
         totalNextPosDuration = duration;
         currentNextPosDuration = duration;
     }
 
-    public void move_to(double posX, double posY) {
-        this.posX = posX;
-        this.posY = posY;
+    public void move_to(Vector2D pos) {
+        this.pos.x = pos.x;
+        this.pos.y = pos.y;
         nextDistX = 0.0;
         nextDistY = 0.0;
         totalNextPosDuration = 0;
         currentNextPosDuration = 0;
     }
 
-    public void move(double distX, double distY) {
-        posX += distX;
-        posY += distY;
+    public void move(Vector2D pos) {
+        this.pos.x += pos.x;
+        this.pos.y += pos.y;
         nextDistX = 0.0;
         nextDistY = 0.0;
         totalNextPosDuration = 0;
@@ -55,7 +56,7 @@ abstract public class MovableShape extends CollisionShape {
         }
         final double di = totalNextPosDuration / delta;
         currentNextPosDuration -= delta;
-        posX += nextDistX / di;
-        posY += nextDistY / di;
+        pos.x += nextDistX / di;
+        pos.y += nextDistY / di;
     }
 }
