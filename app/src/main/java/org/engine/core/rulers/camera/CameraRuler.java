@@ -24,25 +24,17 @@ public class CameraRuler {
         focus = position;
     }
 
-    public double getDrawDistance_X(double posX) {
+    public Vector2D getDrawVector(Vector2D position) {
         if (frame == null) {
-            System.err.println("No Frame attached to current Camera Ruler. Use init() function.");
-            return 0;
+            System.err.println("No Frame attached to camera. Use init() function.");
+            return new Vector2D(0, 0);
         }
         if (focus == null) {
-            return (frame.getWidth() / 2) + (posX - 0);
+            System.err.println("No Focus attached to camera. Use setFocus() function.");
+            return new Vector2D(0, 0);
         }
-        return (frame.getWidth() / 2) + (posX - focus.x);
-    }
+        return new Vector2D((frame.getWidth() / 2) + (position.getX() - focus.getX()),
+                (frame.getHeight() / 2) + (-position.getY() + focus.getY()));
 
-    public double getDrawDistance_Y(double posY) {
-        if (frame == null) {
-            System.err.println("No Frame attached to current Camera Ruler. Use init() function.");
-            return 0;
-        }
-        if (focus == null) {
-            return (this.frame.getHeight() / 2) + (-posY + 0);
-        }
-        return (frame.getHeight() / 2) + (-posY + focus.y);
     }
 }

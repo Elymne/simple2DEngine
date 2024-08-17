@@ -12,6 +12,7 @@ public class TimeRuler {
     public static final int ONE_TWENTY_FPS = 8;
     public static final int SIXTY_FPS = 16;
     public static final int THIRTY_FPS = 33;
+    public static final int ONE_FPS = 1000;
 
     public static final int UNDEFINED_STATE = 0;
     public static final int RUNNING_STATE = 1;

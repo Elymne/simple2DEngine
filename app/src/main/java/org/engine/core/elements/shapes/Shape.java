@@ -11,7 +11,7 @@ import org.engine.core.rulers.camera.CameraRuler;
 public abstract class Shape extends Element {
     private final CameraRuler cameraRuler = CameraRuler.getInstance();
 
-    protected Vector2D pos;
+    protected Vector2D position;
     protected double width;
     protected double height;
     protected double scale = 1.0;
@@ -23,7 +23,7 @@ public abstract class Shape extends Element {
 
     public Shape(String name, Vector2D position, double width, double height, int zIndex) {
         super(name);
-        this.pos = position;
+        this.position = position;
         this.width = width;
         this.height = height;
         this.zIndex = zIndex;
@@ -31,22 +31,18 @@ public abstract class Shape extends Element {
 
     public Shape(Vector2D position, double width, double height, int zIndex) {
         super();
-        this.pos = position;
+        this.position = position;
         this.width = width;
         this.height = height;
         this.zIndex = zIndex;
     }
 
     public Vector2D getPosition() {
-        return pos;
+        return position;
     }
 
-    public double getPointX() {
-        return pos.x - (width / 2);
-    }
-
-    public double getPointY() {
-        return pos.y + (height / 2);
+    public Vector2D getDrawPosition() {
+        return new Vector2D(position.getX() - (width / 2), position.getY() + (height / 2));
     }
 
     public double getWidth() {
@@ -109,20 +105,21 @@ public abstract class Shape extends Element {
     }
 
     public void drawFrame(Graphics g) {
-        final int relPointX = (int) cameraRuler.getDrawDistance_X(getPointX());
-        final int relPointY = (int) cameraRuler.getDrawDistance_Y(getPointY());
+        final Vector2D relativePoint = cameraRuler.getDrawVector(getDrawPosition());
+        final int relPoint_x = (int) relativePoint.getX();
+        final int relPoint_y = (int) relativePoint.getY();
         final int relWidth = (int) getWidth();
         final int relHeight = (int) getHeight();
         if (backgroundColor != null) {
             g.setColor(backgroundColor);
-            g.fillRect(relPointX, relPointY, relWidth, relHeight);
+            g.fillRect(relPoint_x, relPoint_y, relWidth, relHeight);
         }
         if (assetPath != null) {
-            g.drawImage(getImage(), relPointX, relPointY, null);
+            g.drawImage(getImage(), relPoint_x, relPoint_y, null);
         }
         if (borderColor != null) {
             g.setColor(borderColor);
-            g.drawRect(relPointX, relPointY, relWidth, relHeight);
+            g.drawRect(relPoint_x, relPoint_y, relWidth, relHeight);
         }
     }
 }

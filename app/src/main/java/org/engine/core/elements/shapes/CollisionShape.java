@@ -32,10 +32,10 @@ abstract public class CollisionShape extends Shape implements CollisionListener 
         if (this == element) {
             return false;
         }
-        if (getPointX() <= element.getPointX() + element.getWidth() &&
-                getPointX() + getWidth() >= element.getPointX() &&
-                getPointY() >= element.getPointY() - element.getHeight() &&
-                getPointY() - getHeight() <= element.getPointY()) {
+        if (getDrawPosition().getX() <= element.getDrawPosition().getX() + element.getWidth() &&
+                getDrawPosition().getX() + getWidth() >= element.getDrawPosition().getX() &&
+                getDrawPosition().getY() >= element.getDrawPosition().getY() - element.getHeight() &&
+                getDrawPosition().getY() - getHeight() <= element.getDrawPosition().getY()) {
             return true;
         }
         return false;
