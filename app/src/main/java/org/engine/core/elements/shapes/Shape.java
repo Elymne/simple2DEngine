@@ -45,6 +45,14 @@ public abstract class Shape extends Element {
         return new Vector2D(position.getX() - (width / 2), position.getY() + (height / 2));
     }
 
+    public double getDrawPointX() {
+        return position.getX() - (width / 2);
+    }
+
+    public double getDrawPointY() {
+        return position.getY() + (height / 2);
+    }
+
     public double getWidth() {
         return width;
     }

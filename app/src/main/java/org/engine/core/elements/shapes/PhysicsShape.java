@@ -1,6 +1,7 @@
 package org.engine.core.elements.shapes;
 
 import java.util.ArrayList;
+import javax.annotation.Nullable;
 import org.engine.core.attributes.Vector2D;
 
 // TODO 2 Impulse process.
@@ -30,31 +31,42 @@ public abstract class PhysicsShape extends CollisionShape {
 
     @Override
     public void listenCollision(ArrayList<CollisionShape> buffer, int delta) {
-        if (buffer.size() == 0) {
-            addFallingForce(delta);
+        final CollisionShape collisionElement = getFallingCollisionElement(buffer);
+        if (collisionElement == null) {
+            velocity.addY(-(fallingSpeedCap * (delta / 500.0)));
+        } else {
+            if (this.velocity.getY() < 0) {
+                velocity.updateY(0);
+                final double diff = collisionElement.getDrawPointY() - (getDrawPointY() - getHeight());
+                position.addY(diff);
+            }
+
+            if (this.velocity.getY() > 0) {
+                velocity.updateY(0);
+                position.update(lastPosition);
+            }
+
+            if (this.velocity.getX() < 0) {
+                velocity.updateY(0);
+                position.update(lastPosition);
+            }
+
+            if (this.velocity.getX() > 0) {
+                velocity.updateY(0);
+                position.update(lastPosition);
+            }
         }
 
-        if (buffer.size() > 0 && this.velocity.getY() < 0) {
-            processImpact(delta);
-        }
-
-        processMovement(delta);
-    }
-
-    private void processMovement(int delta) {
         lastPosition.update(position);
         position.add(0, (velocity.getY() * (delta / 1_000.0)));
     }
 
-    private void processImpact(int delta) {
-        velocity.updateY(0);
-        position.update(lastPosition);
-    }
-
-    private void addFallingForce(int delta) {
-        if (velocity.getY() <= -fallingSpeedCap) {
-            return;
+    private @Nullable CollisionShape getFallingCollisionElement(ArrayList<CollisionShape> elements) {
+        for (CollisionShape element : elements) {
+            if (element instanceof StaticShape || element instanceof PhysicsShape) {
+                return element;
+            }
         }
-        velocity.addY(-(fallingSpeedCap * (delta / 500.0)));
+        return null;
     }
 }
