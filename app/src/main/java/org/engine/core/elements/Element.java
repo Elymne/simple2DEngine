@@ -1,47 +1,80 @@
 package org.engine.core.elements;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.UUID;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import org.engine.core.characteristics.Characteristic;
+import org.engine.core.rulers.time.TimeListener;
 
-abstract public class Element {
-    private final String key;
-    protected ArrayList<Characteristic> characteristic = new ArrayList<Characteristic>();
+public abstract class Element implements TimeListener {
+    private @Nonnull final String key;
+    private @Nullable Element parent = null;
+    private final ArrayList<Element> subElements = new ArrayList<Element>();
 
-    protected Element(@Nullable String key) {
-        if (key == null) {
-            this.key = UUID.randomUUID().toString();
-            return;
-        }
+    public Element(String key) {
         this.key = key;
+    }
+
+    public Element() {
+        key = UUID.randomUUID().toString();
     }
 
     public String getKey() {
         return key;
     }
 
-    public boolean removeCharacteristic(Class<Characteristic> cClass) {
-        return characteristic.removeIf(node -> node.getClass() == cClass);
+    public void addSubElement(Element element) {
+        element.setParent(this);
+        subElements.add(element);
     }
 
-    public boolean addCharacteristic(Characteristic node) {
-        if (findCharacteristic(node.getClass()) != null) {
-            return false;
+    public void addSubElements(ArrayList<Element> elements) {
+        for (Element element : elements) {
+            element.setParent(this);
         }
-        return characteristic.add(node);
+        subElements.addAll(elements);
     }
 
     @Nullable
-    public Characteristic findCharacteristic(Class<? extends Characteristic> cClass) {
-        for (Characteristic characteristic : characteristic) {
-            if (characteristic.getClass() == cClass) {
-                return characteristic;
+    public Element findSubElement(Class<Element> elementClass) {
+        for (Element element : subElements) {
+            if (element.getClass() == elementClass) {
+                return element;
             }
         }
         return null;
     }
 
-    abstract public void paint(Graphics g);
+    @Nullable
+    public Element findSubElement(String key) {
+        for (Element element : subElements) {
+            if (element.key == key) {
+                return element;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Element> getSubElements() {
+        return subElements;
+    }
+
+    public void removeSubElement(Element element) {
+        subElements.remove(element);
+    }
+
+    public void removeSubElement(String key) {
+        subElements.removeIf(element -> {
+            return element.key == key;
+        });
+    }
+
+    @Nullable
+    public Element getParent() {
+        return parent;
+    }
+
+    public void setParent(Element parent) {
+        this.parent = parent;
+    }
 }
