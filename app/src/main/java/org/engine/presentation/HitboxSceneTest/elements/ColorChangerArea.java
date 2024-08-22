@@ -2,10 +2,10 @@ package org.engine.presentation.HitboxSceneTest.elements;
 
 import java.awt.Color;
 import org.engine.core.attributes.Vector2D;
-import org.engine.core.elements.shapes.AreaShape;
-import org.engine.core.elements.shapes.CollisionShape;
+import org.engine.core.elements.shapes.squads.SquadAreaShape;
+import org.engine.core.elements.shapes.squads.SquadCollisionShape;
 
-public class ColorChangerArea extends AreaShape {
+public class ColorChangerArea extends SquadAreaShape {
 
     public ColorChangerArea(double posX, double posY) {
         super(new Vector2D(posX, posY), 100, 60, 2);
@@ -17,16 +17,16 @@ public class ColorChangerArea extends AreaShape {
     }
 
     @Override
-    public void onCollision(CollisionShape collisionShape) {
+    public void onCollision(SquadCollisionShape collisionShape) {
     }
 
     @Override
-    public void onAreaEnter(CollisionShape collisionShape) {
+    public void onAreaEnter(SquadCollisionShape collisionShape) {
         collisionShape.setBackgroundColor(Color.BLACK);
     }
 
     @Override
-    public void onAreaLeave(CollisionShape collisionShape) {
+    public void onAreaLeave(SquadCollisionShape collisionShape) {
         collisionShape.setBackgroundColor(Color.RED);
 
     }

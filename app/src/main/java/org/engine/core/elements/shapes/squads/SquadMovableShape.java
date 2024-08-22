@@ -1,18 +1,18 @@
-package org.engine.core.elements.shapes;
+package org.engine.core.elements.shapes.squads;
 
 import java.util.ArrayList;
 import org.engine.core.attributes.Vector2D;
 
-abstract public class MovableShape extends CollisionShape {
+abstract public class SquadMovableShape extends SquadCollisionShape {
     private Vector2D nextPosition = this.position;
     private int currentTravelDuration = 0;
     private int totalTravelDuration = 0;
 
-    public MovableShape(String name, Vector2D position, double width, double height, int zIndex) {
+    public SquadMovableShape(String name, Vector2D position, double width, double height, int zIndex) {
         super(name, position, width, height, zIndex);
     }
 
-    public MovableShape(Vector2D position, double width, double height, int zIndex) {
+    public SquadMovableShape(Vector2D position, double width, double height, int zIndex) {
         super(position, width, height, zIndex);
     }
 
@@ -41,7 +41,7 @@ abstract public class MovableShape extends CollisionShape {
     }
 
     @Override
-    public void listenCollision(ArrayList<CollisionShape> buffer, int delta) {
+    public void listenCollision(ArrayList<SquadCollisionShape> buffer, int delta) {
         if (currentTravelDuration <= 0) {
             return;
         }
