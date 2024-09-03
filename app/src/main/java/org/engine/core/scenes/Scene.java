@@ -2,12 +2,11 @@ package org.engine.core.scenes;
 
 import java.util.ArrayList;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import org.engine.core.elements.Element;
-import org.engine.core.rulers.camera.CameraRuler;
+import org.engine.core.elements.shapes.squads.SquadCollisionShape;
+import org.engine.core.rulers.collision.CollisionRuler;
 
 public abstract class Scene {
-    protected final CameraRuler cameraRuler = CameraRuler.getInstance();
     private @Nonnull final String key;
     private final ArrayList<Element> elements = new ArrayList<Element>();
 
@@ -24,40 +23,16 @@ public abstract class Scene {
     }
 
     public void addElement(Element element) {
+        if (element instanceof SquadCollisionShape) {
+            CollisionRuler.getInstance().addElement((SquadCollisionShape) element);
+        }
         this.elements.add(element);
     }
 
-    public void addElements(ArrayList<Element> elements) {
-        this.elements.addAll(elements);
-    }
-
     public void removeElement(Element element) {
+        if (element instanceof SquadCollisionShape) {
+            CollisionRuler.getInstance().removeElement((SquadCollisionShape) element);
+        }
         this.elements.remove(element);
-    }
-
-    public void removeElement(String key) {
-        this.elements.removeIf(element -> {
-            return element.getKey() == key;
-        });
-    }
-
-    @Nullable
-    public Element findElement(Class<Element> elementClass) {
-        for (Element element : this.elements) {
-            if (element.getClass() == elementClass) {
-                return element;
-            }
-        }
-        return null;
-    }
-
-    @Nullable
-    public Element findSubElement(String key) {
-        for (Element element : this.elements) {
-            if (element.getKey() == key) {
-                return element;
-            }
-        }
-        return null;
     }
 }

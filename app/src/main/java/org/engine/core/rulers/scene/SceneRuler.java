@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import javax.annotation.Nullable;
 import javax.swing.JPanel;
 import org.engine.core.elements.Element;
-import org.engine.core.elements.shapes.Shape;
+import org.engine.core.elements.shapes.squads.SquadShape;
 import org.engine.core.scenes.Scene;
 
 public class SceneRuler extends JPanel {
@@ -41,8 +41,8 @@ public class SceneRuler extends JPanel {
             return;
         }
         for (Element element : currentScene.getElements()) {
-            if (element instanceof Shape) {
-                ((Shape) element).drawFrame(g);
+            if (element instanceof SquadShape) {
+                ((SquadShape) element).drawFrame(g);
             }
         }
     }

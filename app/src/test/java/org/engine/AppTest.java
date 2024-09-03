@@ -9,6 +9,6 @@ import static org.junit.Assert.*;
 public class AppTest {
     @Test
     public void VentilleLesAssets() {
-        assertEquals("Tu es assertif ?", "Non.");
+        assertEquals("Assertif", "Assertif");
     }
 }

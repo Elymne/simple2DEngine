@@ -1,6 +1,7 @@
 package org.engine.presentation.PhysicsSceneTest;
 
 import org.engine.core.attributes.Vector2D;
+import org.engine.core.rulers.camera.CameraRuler;
 import org.engine.core.scenes.Scene;
 import org.engine.presentation.PhysicsSceneTest.elements.FallingBlock;
 import org.engine.presentation.PhysicsSceneTest.elements.Floor;
@@ -18,7 +19,7 @@ public class PhysicsSceneTest extends Scene {
 
     public PhysicsSceneTest() {
         super("Physics scene");
-        cameraRuler.setFocus(new Vector2D(0, 200));
+        CameraRuler.getInstance().setFocus(new Vector2D(0, 200));
         this.addElement(floor);
         this.addElement(fallingBlock);
         this.addElement(fallingBlock2);
